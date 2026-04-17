@@ -917,9 +917,14 @@ button {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10,16,12,.06) 0%, rgba(10,16,12,.28) 42%, rgba(10,16,12,.88) 100%),
-    linear-gradient(140deg, rgba(19,115,58,.1) 0%, rgba(19,115,58,0) 40%, rgba(19,115,58,.18) 100%);
+    linear-gradient(180deg, rgba(10,16,12,.05) 0%, rgba(10,16,12,.38) 45%, rgba(10,16,12,.96) 100%),
+    linear-gradient(140deg, rgba(19,115,58,.1) 0%, rgba(19,115,58,0) 40%, rgba(19,115,58,.2) 100%);
   z-index: 1;
+}
+
+.service-card h3,
+.service-card p {
+  text-shadow: 0 2px 10px rgba(0,0,0,.55);
 }
 
 .service-card-body {
@@ -1621,8 +1626,18 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,16,12,.1) 0%, rgba(10,16,12,.82) 100%);
+  background: linear-gradient(180deg, rgba(10,16,12,.1) 0%, rgba(10,16,12,.45) 50%, rgba(10,16,12,.95) 100%);
   z-index: 1;
+}
+
+.related-card h3,
+.related-card p {
+  text-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+
+/* Hide the service tag in related cards as well (parent category removed) */
+.related-card .service-tag {
+  display: none;
 }
 
 .related-card:hover .related-card-media {
@@ -1709,8 +1724,26 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,16,12,.08) 0%, rgba(10,16,12,.86) 100%);
+  background:
+    linear-gradient(180deg, rgba(10,16,12,.05) 0%, rgba(10,16,12,.35) 45%, rgba(10,16,12,.96) 100%),
+    linear-gradient(180deg, rgba(10,74,60,0) 55%, rgba(10,74,60,.55) 100%);
   z-index: 1;
+}
+
+/* Hide the "Garden structures"/"Groundworks"/"Maintenance" service tag on hub cards */
+.services-page-card .service-tag {
+  display: none;
+}
+
+/* Make the card body itself a safety overlay so headings are readable over any image */
+.services-page-card-body {
+  background: linear-gradient(180deg, rgba(10,16,12,0) 0%, rgba(10,16,12,.7) 60%, rgba(10,16,12,.95) 100%);
+  padding-top: 96px;
+}
+
+.services-page-card h3,
+.services-page-card p {
+  text-shadow: 0 2px 10px rgba(0,0,0,.55);
 }
 
 .services-page-card-body {
@@ -2085,25 +2118,29 @@ button {
   }
 }
 
-/* Conversion: process steps on contact page */
+/* Conversion: process steps on contact page
+   Scoped to .process-steps so it does not affect the separate
+   .process-grid / .process-step layout used on the services hub. */
 .process-steps {
   display: grid;
   gap: 14px;
   margin-top: 8px;
 }
 
-.process-step {
+.process-steps .process-step {
   display: grid;
   grid-template-columns: 44px 1fr;
-  gap: 16px;
+  column-gap: 18px;
+  row-gap: 4px;
   align-items: start;
-  padding: 16px 18px;
+  padding: 20px 22px;
   border-radius: var(--radius-md);
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.08);
 }
 
-.process-step-num {
+.process-steps .process-step-num {
+  grid-row: span 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2116,18 +2153,24 @@ button {
   font-size: 1.1rem;
 }
 
-.process-step strong {
+.process-steps .process-step > div {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.process-steps .process-step strong {
   display: block;
   font-size: 1rem;
   color: var(--white);
   margin-bottom: 4px;
 }
 
-.process-step p {
+.process-steps .process-step p {
   margin: 0;
-  font-size: .92rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,.7);
+  font-size: .94rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.78);
+  max-width: none;
 }
 
 /* Form sub-copy under heading */
@@ -2249,21 +2292,21 @@ button {
 }
 
 /* Process step badges on light */
-.light-section .process-step,
-.page-light .process-step {
+.light-section .process-steps .process-step,
+.page-light .process-steps .process-step {
   background: rgba(10,74,60,.04);
   border-color: rgba(10,74,60,.1);
 }
-.light-section .process-step strong,
-.page-light .process-step strong {
+.light-section .process-steps .process-step strong,
+.page-light .process-steps .process-step strong {
   color: var(--forest);
 }
-.light-section .process-step p,
-.page-light .process-step p {
+.light-section .process-steps .process-step p,
+.page-light .process-steps .process-step p {
   color: rgba(12,26,21,.72);
 }
-.light-section .process-step-num,
-.page-light .process-step-num {
+.light-section .process-steps .process-step-num,
+.page-light .process-steps .process-step-num {
   background: rgba(138,87,26,.14);
   color: var(--gold-ink);
 }
