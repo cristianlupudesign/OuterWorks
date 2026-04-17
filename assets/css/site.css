@@ -2397,3 +2397,129 @@ input::placeholder,
 textarea::placeholder {
   color: rgba(12,26,21,.5);
 }
+
+/* Footer: social + Google review row */
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.9);
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.footer-social a:hover {
+  background: var(--gold);
+  color: var(--forest);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-social-review {
+  width: auto !important;
+  padding: 0 14px;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+/* Contact page: social + Google review callout */
+.social-callout {
+  margin-top: 32px;
+  padding: 24px 26px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  border: 1px solid rgba(10,74,60,.1);
+  box-shadow: 0 10px 26px rgba(10,74,60,.06);
+  display: grid;
+  gap: 18px;
+}
+
+.social-callout strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--forest);
+  margin-bottom: 6px;
+}
+
+.social-callout p {
+  margin: 0;
+  color: rgba(12,26,21,.72);
+  line-height: 1.65;
+}
+
+.social-callout p a {
+  color: var(--gold-ink);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.social-callout-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-callout-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(10,74,60,.12);
+  background: rgba(10,74,60,.04);
+  color: var(--forest);
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.social-callout-links a:hover {
+  background: var(--gold);
+  color: var(--forest);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.social-callout-links svg {
+  width: 18px;
+  height: 18px;
+}
+
+.social-callout-review {
+  width: auto !important;
+  gap: 8px;
+  padding: 0 14px;
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: .02em;
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: var(--forest) !important;
+}
+
+@media (min-width: 720px) {
+  .social-callout {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
