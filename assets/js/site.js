@@ -135,6 +135,28 @@
     if (type === 'success') status.classList.add('is-success');
   }
 
+  // Gallery filter
+  const galleryFilter = document.querySelector('[data-gallery-filter]');
+  const galleryGrid = document.querySelector('[data-gallery-grid]');
+  if (galleryFilter && galleryGrid) {
+    const items = galleryGrid.querySelectorAll('.gallery-item');
+    galleryFilter.addEventListener('click', function (event) {
+      const btn = event.target.closest('button[data-filter]');
+      if (!btn) return;
+      const filter = btn.dataset.filter;
+      galleryFilter.querySelectorAll('button').forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      items.forEach(item => {
+        const cat = item.dataset.cat || '';
+        const show = filter === 'all' || cat === filter;
+        item.classList.toggle('is-hidden', !show);
+      });
+    });
+  }
+
   forms.forEach(form => {
     form.addEventListener('submit', async function (event) {
       event.preventDefault();

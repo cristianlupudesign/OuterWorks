@@ -41,6 +41,7 @@
 
 - [Home](https://outerworks.co.uk/)
 - [All Services](https://outerworks.co.uk/services/)
+- [Gallery](https://outerworks.co.uk/gallery/)
 - [Areas We Cover](https://outerworks.co.uk/areas/)
 - [About](https://outerworks.co.uk/about/)
 - [Contact / Free Quote](https://outerworks.co.uk/contact/)
