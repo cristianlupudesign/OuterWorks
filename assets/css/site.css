@@ -2084,3 +2084,87 @@ button {
     opacity: 1;
   }
 }
+
+/* Conversion: process steps on contact page */
+.process-steps {
+  display: grid;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.process-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(200,145,42,.16);
+  color: var(--gold-2);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.process-step strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.process-step p {
+  margin: 0;
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.7);
+}
+
+/* Form sub-copy under heading */
+.form-sub {
+  margin: -4px 0 18px;
+  font-size: .92rem;
+  line-height: 1.55;
+  color: rgba(24,51,37,.66);
+}
+
+.page-light .form-sub,
+.light-section .form-sub {
+  color: rgba(24,51,37,.66);
+}
+
+/* Pull-quote attribution */
+.break-attribution {
+  display: block;
+  margin-top: 16px;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+
+/* Desktop: show phone in header as quick-dial */
+@media (min-width: 880px) {
+  .nav-cta {
+    display: inline-flex;
+  }
+}
+
+/* Stronger hero-note for trust on desktop */
+@media (min-width: 720px) {
+  .hero-note {
+    gap: 14px 22px;
+    color: rgba(255,255,255,.72);
+  }
+}
