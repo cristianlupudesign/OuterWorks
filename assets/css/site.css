@@ -2686,3 +2686,252 @@ textarea::placeholder {
     aspect-ratio: 16 / 9;
   }
 }
+
+/* ==========================
+   Floating quick-contact FAB
+   ========================== */
+.quick-contact {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.quick-contact-btn {
+  pointer-events: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 30px rgba(0,0,0,.25);
+  color: var(--white);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.quick-contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(0,0,0,.32);
+}
+.quick-contact-btn svg { width: 24px; height: 24px; }
+.quick-contact-wa { background: #25d366; }
+.quick-contact-call { background: var(--gold); color: var(--forest); }
+
+@media (min-width: 720px) {
+  .quick-contact { right: 24px; bottom: 24px; }
+}
+
+/* ==========================
+   Announcement bar
+   ========================== */
+.announcement {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  background: var(--gold);
+  color: var(--forest);
+}
+.announcement-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  padding: 10px 0;
+  font-size: .86rem;
+  font-weight: 700;
+}
+.announcement-text { flex: 1 1 auto; min-width: 0; }
+.announcement-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--forest);
+  color: var(--gold);
+  font-weight: 800;
+  font-size: .78rem;
+  letter-spacing: .02em;
+  transition: background .2s ease;
+}
+.announcement-cta:hover { background: #062a21; }
+.announcement-close {
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  padding: 4px 8px;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--forest);
+  opacity: .6;
+}
+.announcement-close:hover { opacity: 1; }
+html.has-announcement .site-header { top: 0; }
+
+/* ==========================
+   Postcode checker (hero)
+   ========================== */
+.postcode-check {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 10px 10px 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  max-width: 440px;
+  align-items: center;
+}
+.postcode-check label {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+.postcode-check input {
+  flex: 1 1 120px;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  color: var(--white);
+  padding: 6px 4px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  outline: none;
+}
+.postcode-check input::placeholder { color: rgba(255,255,255,.55); }
+.postcode-check button {
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--forest);
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.postcode-check button:hover { background: var(--gold-2); }
+.postcode-result {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.9);
+  font-size: .88rem;
+  line-height: 1.55;
+  max-width: 440px;
+}
+.postcode-result.is-match {
+  background: rgba(42,166,136,.18);
+  border-color: rgba(42,166,136,.42);
+}
+.postcode-result.is-wide {
+  background: rgba(242,183,89,.18);
+  border-color: rgba(242,183,89,.42);
+}
+.postcode-result:empty { display: none; }
+.postcode-result strong { color: var(--white); }
+
+/* ==========================
+   Quote Promise block
+   ========================== */
+.quote-promise {
+  background: var(--forest);
+  color: var(--white);
+  padding: clamp(48px, 6vw, 72px) 0;
+}
+.quote-promise-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  max-width: 620px;
+}
+.quote-promise-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+.quote-promise-item {
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.quote-promise-item svg {
+  width: 24px;
+  height: 24px;
+  color: var(--gold);
+  margin-top: 3px;
+}
+.quote-promise-item strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.quote-promise-item p {
+  margin: 0;
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.75);
+}
+@media (min-width: 720px) {
+  .quote-promise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .quote-promise-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ==========================
+   Trust badge strip
+   ========================== */
+.trust-badges {
+  padding: 36px 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+.trust-badges-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 22px;
+  text-align: center;
+}
+.trust-badges-label {
+  width: 100%;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: rgba(10,74,60,.04);
+  border: 1px solid rgba(10,74,60,.12);
+  color: var(--forest);
+  font-weight: 800;
+  font-size: .84rem;
+}
+.trust-badge svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gold-ink);
+}
