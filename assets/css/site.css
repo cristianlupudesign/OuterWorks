@@ -2719,6 +2719,7 @@ textarea::placeholder {
 .quick-contact-btn svg { width: 24px; height: 24px; }
 .quick-contact-wa { background: #25d366; }
 .quick-contact-call { background: var(--gold); color: var(--forest); }
+.quick-contact-email { background: var(--forest); color: var(--white); border: 1px solid rgba(255,255,255,.12); }
 
 @media (min-width: 720px) {
   .quick-contact { right: 24px; bottom: 24px; }

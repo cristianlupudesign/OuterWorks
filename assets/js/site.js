@@ -169,6 +169,9 @@
       <a class="quick-contact-btn quick-contact-call" href="tel:07348580359" aria-label="Call Outerworks on 07348 580359">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.5 4h3l1.1 4.4-1.9 1.9a14.6 14.6 0 0 0 4 4l1.9-1.9L20 13.5v3a2 2 0 0 1-2.2 2C10.7 18 6 13.3 5.5 6.2A2 2 0 0 1 7.5 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <a class="quick-contact-btn quick-contact-email" href="mailto:contact@outerworks.co.uk" aria-label="Email Outerworks at contact@outerworks.co.uk">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="m5 8 7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     `;
     document.body.appendChild(fab);
   }
@@ -205,10 +208,12 @@
   const postcodeForm = document.querySelector('[data-postcode-check]');
   if (postcodeForm) {
     const input = postcodeForm.querySelector('input[name="postcode"]');
-    const result = postcodeForm.querySelector('[data-postcode-result]');
+    // Result element sits next to the form, not inside it
+    const result = document.querySelector('[data-postcode-result]');
     const prefixes = (config.coveragePrefixes || []).map(p => p.toUpperCase());
     postcodeForm.addEventListener('submit', function (event) {
       event.preventDefault();
+      if (!input || !result) return;
       const raw = (input.value || '').trim().toUpperCase().replace(/\s+/g, ' ');
       if (!raw) return;
       const outward = raw.split(' ')[0].replace(/[0-9]/g, '');
