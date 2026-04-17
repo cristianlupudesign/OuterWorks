@@ -2192,3 +2192,142 @@ button {
 .feature-item {
   padding: 20px 18px;
 }
+
+/* ===========================================
+   Contrast overrides
+   Khaki-orange (#F2B759 / #f6cd88) on cream
+   fails WCAG; use a darker amber for text on
+   light sections. Bump faint white-on-dark.
+   =========================================== */
+
+:root {
+  --gold-ink: #8a571a;
+  --gold-ink-2: #a56e22;
+}
+
+/* Emphasised "em" in section titles on light backgrounds */
+.light-section .section-title em,
+.page-light .section-title em {
+  color: var(--gold-ink);
+}
+
+/* Eyebrow label on light backgrounds */
+.light-section .eyebrow,
+.page-light .eyebrow {
+  color: var(--gold-ink);
+}
+.light-section .eyebrow::before,
+.page-light .eyebrow::before {
+  background: var(--gold-ink);
+  box-shadow: 0 0 0 6px rgba(138,87,26,.14);
+}
+
+/* "View service" / card links on light surfaces */
+.light-section .btn-link,
+.page-light .btn-link,
+.related-card .btn-link,
+.services-page-card .btn-link {
+  color: var(--gold-ink);
+}
+
+/* FAQ "+" marker on light section */
+.light-section .faq-card summary::after,
+.page-light .faq-card summary::after {
+  color: var(--gold-ink);
+}
+
+/* Stat / label accents on light */
+.light-section .stat-kicker,
+.page-light .stat-kicker,
+.light-section .break-attribution,
+.page-light .break-attribution,
+.light-section .info-card strong,
+.light-section .mini-card strong,
+.page-light .info-card strong,
+.page-light .mini-card strong {
+  color: var(--gold-ink);
+}
+
+/* Process step badges on light */
+.light-section .process-step,
+.page-light .process-step {
+  background: rgba(10,74,60,.04);
+  border-color: rgba(10,74,60,.1);
+}
+.light-section .process-step strong,
+.page-light .process-step strong {
+  color: var(--forest);
+}
+.light-section .process-step p,
+.page-light .process-step p {
+  color: rgba(12,26,21,.72);
+}
+.light-section .process-step-num,
+.page-light .process-step-num {
+  background: rgba(138,87,26,.14);
+  color: var(--gold-ink);
+}
+
+/* Pill / tag contrast on light */
+.light-section .page-hero-pill,
+.page-light .page-hero-pill,
+.light-section .tag-pill,
+.page-light .tag-pill {
+  border-color: rgba(10,74,60,.18);
+  background: rgba(10,74,60,.05);
+  color: var(--forest);
+}
+
+/* Stronger copy on light */
+.light-section .section-lead,
+.light-section .copy-lead,
+.page-light .section-lead,
+.page-light .copy-lead {
+  color: rgba(12,26,21,.78);
+}
+
+/* Form helpers on light backgrounds */
+.light-section .form-sub,
+.page-light .form-sub,
+.form-sub {
+  color: rgba(12,26,21,.72);
+}
+
+/* Contact card links: darker forest for 7:1 on cream */
+.contact-card a.link,
+.form-status.is-success {
+  color: var(--forest);
+}
+
+/* Feature strip captions — subtle but readable on forest */
+.feature-item span {
+  color: rgba(255,255,255,.75);
+}
+
+/* Faint white-on-dark bumped to meet AA */
+.hero-note {
+  color: rgba(255,255,255,.82);
+}
+.hero-scroll {
+  color: rgba(255,255,255,.58);
+}
+.breadcrumbs {
+  color: rgba(255,255,255,.78);
+}
+.nav-main a {
+  color: rgba(255,255,255,.78);
+}
+.mobile-nav a {
+  color: rgba(255,255,255,.92);
+}
+.site-footer .footer-col a,
+.site-footer .footer-contact a,
+.site-footer p {
+  color: rgba(255,255,255,.78);
+}
+
+/* Placeholder contrast */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(12,26,21,.5);
+}
