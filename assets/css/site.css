@@ -1735,6 +1735,24 @@ button {
   display: none;
 }
 
+/* Lock card-on-image text to white — the cards live inside .light-section
+   and would otherwise inherit --ink, becoming invisible on dark photos. */
+.services-page-card h3,
+.light-section .services-page-card h3,
+.page-light .services-page-card h3 {
+  color: #fff;
+}
+.services-page-card p,
+.light-section .services-page-card p,
+.page-light .services-page-card p {
+  color: rgba(255,255,255,.85);
+}
+.services-page-card .btn-link,
+.light-section .services-page-card .btn-link,
+.page-light .services-page-card .btn-link {
+  color: var(--gold-2);
+}
+
 /* Make the card body itself a safety overlay so headings are readable over any image */
 .services-page-card-body {
   background: linear-gradient(180deg, rgba(10,16,12,0) 0%, rgba(10,16,12,.7) 60%, rgba(10,16,12,.95) 100%);
@@ -1758,11 +1776,12 @@ button {
   font-family: var(--font-head);
   font-size: 2rem;
   line-height: 1.04;
+  color: var(--white);
 }
 
 .services-page-card p {
   margin: 0 0 16px;
-  color: rgba(255,255,255,.68);
+  color: rgba(255,255,255,.82);
   line-height: 1.7;
 }
 
