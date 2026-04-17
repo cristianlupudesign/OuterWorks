@@ -2278,6 +2278,29 @@ button {
   color: var(--forest);
 }
 
+/* Make .light-section actually light.
+   Without a background, dark-on-light text was rendering dark-on-dark. */
+.light-section {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* FAQ cards need to pop on cream — solid white + a soft shadow */
+.light-section .faq-card,
+.page-light .faq-card {
+  background: var(--white);
+  box-shadow: 0 10px 26px rgba(10,74,60,.08);
+  border-color: rgba(10,74,60,.08);
+}
+.light-section .faq-card summary,
+.page-light .faq-card summary {
+  color: var(--ink);
+}
+.light-section .faq-card p,
+.page-light .faq-card p {
+  color: rgba(12,26,21,.72);
+}
+
 /* Stronger copy on light */
 .light-section .section-lead,
 .light-section .copy-lead,
