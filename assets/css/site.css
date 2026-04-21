@@ -2936,3 +2936,164 @@ html.has-announcement .site-header { top: 0; }
   height: 18px;
   color: var(--gold-ink);
 }
+
+/* ==========================================================
+   Light-mode override layer
+   Flips mid-page sections from dark to cream (editorial feel),
+   while keeping hero, quote-break, final CTA and footer dark
+   as intentional accents.
+   ========================================================== */
+
+/* Feature strip: was dark forest gradient; become cream with a
+   single hairline divider top and bottom */
+.page-light .feature-strip {
+  background: var(--paper);
+  border-top: 1px solid rgba(10,74,60,.1);
+  border-bottom: 1px solid rgba(10,74,60,.1);
+}
+.page-light .feature-item {
+  border-color: rgba(10,74,60,.08) !important;
+  color: var(--forest);
+}
+.page-light .feature-item strong {
+  color: var(--forest);
+}
+.page-light .feature-item span {
+  color: rgba(10,74,60,.65);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: .72rem;
+}
+
+/* Editorial "Services" grid section — lift onto cream */
+.page-light .editorial-section {
+  background: var(--paper);
+  color: var(--ink);
+}
+.page-light .editorial-section .section-lead {
+  color: rgba(12,26,21,.7);
+}
+
+/* "Why Outerworks" parallax — kill the parallax layer + dark overlay,
+   replace with a calm cream section */
+.page-light .parallax-section {
+  background: var(--paper);
+  color: var(--ink);
+}
+.page-light .parallax-section .parallax-layer {
+  display: none;
+}
+.page-light .parallax-section .parallax-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.page-light .parallax-section .point-row h3 {
+  color: var(--ink);
+}
+.page-light .parallax-section .point-row p {
+  color: rgba(12,26,21,.7);
+}
+.page-light .parallax-section .point-icon {
+  color: var(--gold-ink);
+  background: rgba(242,183,89,.16);
+}
+
+/* Trust badges strip already on paper — add a divider */
+.page-light .trust-badges {
+  border-top: 1px solid rgba(10,74,60,.1);
+  border-bottom: 1px solid rgba(10,74,60,.1);
+}
+
+/* Service cards: their bodies sit on a dark image + built-in gradient,
+   so they already render white text over photos — no change. */
+
+/* Site header (transparent at top, solid-on-scroll): switch the scrolled
+   state to cream with a subtle border */
+.page-light .site-header.is-scrolled {
+  background: rgba(248,245,239,.92);
+  border-bottom: 1px solid rgba(10,74,60,.08);
+  box-shadow: 0 10px 24px rgba(10,74,60,.06);
+}
+.page-light .nav-main a {
+  color: rgba(10,74,60,.72);
+}
+.page-light .nav-main a:hover,
+.page-light .nav-main a.is-active {
+  color: var(--forest);
+}
+.page-light .nav-toggle {
+  border-color: rgba(10,74,60,.16);
+  background: rgba(10,74,60,.04);
+  color: var(--forest);
+}
+
+/* Contact band / coverage-section already use paper — fine.
+   Light-section already overridden earlier. */
+
+/* Quote-promise band — keep it dark as a deliberate accent (it's the
+   one moment where the forest asserts itself on an otherwise cream page) */
+.page-light .quote-promise {
+  background: var(--forest);
+  color: var(--white);
+}
+.page-light .quote-promise .eyebrow {
+  color: var(--gold);
+}
+.page-light .quote-promise .section-title {
+  color: var(--white);
+}
+.page-light .quote-promise .section-title em {
+  color: var(--gold);
+}
+
+/* Quote-break pull quote: keep dark. Quote-section (final form): keep dark. */
+
+/* Announcement bar — already gold, fine */
+
+/* Service chip cloud on home (the row of extra services) — tidy for paper */
+.page-light .service-chip-cloud a {
+  color: var(--forest);
+  background: rgba(10,74,60,.05);
+  border-color: rgba(10,74,60,.1);
+}
+.page-light .service-chip-cloud a:hover {
+  background: var(--gold);
+  color: var(--forest);
+  border-color: var(--gold);
+}
+
+/* Split-bleed "How it works" — split-copy has its own dark panel
+   which stays. The light-section wrapper becomes cream (already handled). */
+
+/* Postcode checker on hero: hero still dark, so keep white-on-glass */
+
+/* Inline lists (the chip row on services hub) */
+.page-light .inline-list span {
+  background: rgba(10,74,60,.05);
+  border: 1px solid rgba(10,74,60,.1);
+  color: var(--forest);
+}
+
+/* Area cloud on /areas/ */
+.page-light .area-cloud span {
+  background: rgba(10,74,60,.05);
+  border: 1px solid rgba(10,74,60,.1);
+  color: var(--forest);
+}
+
+/* CTA panel (bottom of several pages): keep as dark green accent */
+.page-light .cta-panel {
+  background: linear-gradient(145deg, rgba(19,115,58,.14) 0%, var(--forest) 100%);
+  border-color: rgba(10,74,60,.2);
+  color: var(--white);
+}
+.page-light .cta-panel h2,
+.page-light .cta-panel h3 {
+  color: var(--white);
+}
+.page-light .cta-panel p {
+  color: rgba(255,255,255,.78);
+}
+
+/* List stack on the home split-bleed — already styled by .split-copy (dark) */
