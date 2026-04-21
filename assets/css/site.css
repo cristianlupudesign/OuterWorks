@@ -3147,3 +3147,54 @@ html.has-announcement .site-header { top: 0; }
   font-size: .74rem;
   letter-spacing: .22em;
 }
+
+/* Contrast safeguards for DARK sections on an otherwise light page.
+   The broad .page-light overrides above flip eyebrow / section-lead /
+   section-title-em to dark amber or ink — unreadable when the section
+   itself stays dark (hero, page-hero, split-copy panel, quote-break
+   pull quote, final quote-section form). Restore light text here. */
+
+.page-light .hero .eyebrow,
+.page-light .page-hero .eyebrow,
+.page-light .split-copy .eyebrow,
+.page-light .quote-section .eyebrow,
+.page-light .quote-break .eyebrow {
+  color: var(--gold-2);
+}
+
+.page-light .split-copy .section-title em,
+.page-light .quote-section .section-title em {
+  color: var(--gold-2);
+}
+
+.page-light .split-copy .section-lead,
+.page-light .split-copy .copy-lead,
+.page-light .quote-section .section-lead,
+.page-light .quote-section .copy-lead,
+.page-light .hero-copy p,
+.page-light .page-hero-copy p {
+  color: rgba(255,255,255,.78);
+}
+
+.page-light .split-copy .section-title,
+.page-light .quote-section .section-title {
+  color: var(--white);
+}
+
+.page-light .hero-note span,
+.page-light .breadcrumbs,
+.page-light .page-hero-pill {
+  color: rgba(255,255,255,.82);
+}
+
+.page-light .page-hero-pill {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Form fields inside dark quote-section need explicit styling so labels
+   and placeholders don't disappear */
+.page-light .quote-section .quote-card {
+  background: rgba(255,255,255,.96);
+  color: var(--ink);
+}
