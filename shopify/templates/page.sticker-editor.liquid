@@ -1,0 +1,581 @@
+{% comment %}
+  Sticker Editor — customer preview only (not print-ready).
+  Customer flow:
+    1. Upload an image
+    2. Pick size (mm) — preview shows 3mm bleed + die-cut white border
+    3. Pick quantity — tier discounts auto-applied to displayed price
+    4. Pick finish — none / glossy laminate / matte laminate
+    5. Add to cart (line item properties carry the choices)
+
+  Required Shopify setup (one-time, by store owner):
+    - Create a product called "Custom Stickers" with a single variant.
+    - In this template's <script> block, set STICKER_VARIANT_ID
+      to that variant's numeric ID (Admin > Products > Variant URL).
+    - Optionally add Shopify "Buy X get Y" / automatic discounts that
+      match the QUANTITY_TIERS below, so the cart total matches the
+      preview. The preview only shows expected pricing; the real
+      discount is applied by Shopify at checkout.
+    - Assign this template ("sticker-editor") to a page in
+      Admin > Online Store > Pages > [Page] > Theme template.
+
+  No print/production artifacts are generated. The customer-uploaded
+  image is sent to cart as a hosted URL via /tools/async_uploader (a
+  built-in Shopify endpoint). The store owner can fetch the original
+  file from each order's line item properties to prepare print files.
+{% endcomment %}
+
+<style>
+  .se-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1a1a1a; }
+  .se-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 860px) { .se-grid { grid-template-columns: 1fr; } }
+  .se-h1 { font-size: 28px; margin: 0 0 6px; font-weight: 700; }
+  .se-sub { color: #666; margin: 0 0 24px; font-size: 14px; }
+
+  .se-stage { background: #f4f4f4; border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 420px; position: relative; overflow: hidden; }
+  .se-stage-inner { position: relative; display: inline-block; max-width: 100%; }
+  .se-canvas { display: block; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.12); background: transparent; }
+  .se-bleed-ring { position: absolute; inset: 0; border: 1px dashed rgba(220, 38, 38, .85); border-radius: 4px; pointer-events: none; }
+  .se-dim-label { position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); font-size: 11px; color: #555; background: #fff; padding: 2px 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.1); white-space: nowrap; }
+  .se-empty { color: #999; text-align: center; font-size: 14px; }
+  .se-empty strong { display: block; color: #444; margin-bottom: 4px; font-size: 16px; }
+
+  .se-finish-coat { position: absolute; inset: 0; border-radius: 4px; pointer-events: none; mix-blend-mode: overlay; opacity: 0; transition: opacity .25s; }
+  .se-finish-coat.glossy { opacity: 1; background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.55) 45%, rgba(255,255,255,0) 60%); }
+  .se-finish-coat.matte { opacity: 1; background: rgba(255,255,255,.08); mix-blend-mode: normal; backdrop-filter: blur(.4px); }
+
+  .se-field { margin-bottom: 18px; }
+  .se-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #222; }
+  .se-hint { font-size: 12px; color: #888; margin-top: 4px; }
+  .se-input, .se-select { width: 100%; padding: 10px 12px; border: 1px solid #d0d0d0; border-radius: 8px; font-size: 14px; background: #fff; }
+  .se-input:focus, .se-select:focus { outline: none; border-color: #1a1a1a; }
+
+  .se-size-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .se-upload { border: 2px dashed #c8c8c8; border-radius: 10px; padding: 22px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+  .se-upload:hover, .se-upload.drag { border-color: #1a1a1a; background: #fafafa; }
+  .se-upload input { display: none; }
+  .se-upload-icon { font-size: 24px; margin-bottom: 6px; }
+  .se-upload-cta { font-weight: 600; font-size: 14px; }
+  .se-upload-meta { font-size: 12px; color: #888; margin-top: 4px; }
+  .se-filename { font-size: 12px; color: #333; margin-top: 8px; word-break: break-all; }
+
+  .se-segmented { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; background: #f0f0f0; padding: 4px; border-radius: 10px; }
+  .se-segmented input { display: none; }
+  .se-segmented label { text-align: center; padding: 8px 6px; border-radius: 7px; font-size: 13px; cursor: pointer; transition: background .15s, color .15s; color: #555; }
+  .se-segmented input:checked + label { background: #1a1a1a; color: #fff; font-weight: 600; }
+
+  .se-qty-row { display: flex; align-items: center; gap: 8px; }
+  .se-qty-btn { width: 36px; height: 36px; border: 1px solid #d0d0d0; background: #fff; border-radius: 8px; font-size: 18px; cursor: pointer; }
+  .se-qty-btn:hover { background: #f5f5f5; }
+  .se-qty-input { width: 80px; text-align: center; padding: 8px; border: 1px solid #d0d0d0; border-radius: 8px; font-size: 14px; }
+
+  .se-tiers { margin-top: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .se-tier { text-align: center; padding: 6px 4px; border-radius: 6px; background: #f4f4f4; font-size: 11px; color: #555; }
+  .se-tier strong { display: block; color: #222; font-size: 12px; }
+  .se-tier.active { background: #1a1a1a; color: #fff; }
+  .se-tier.active strong { color: #fff; }
+
+  .se-price-box { margin: 20px 0; padding: 16px; background: #f9f9f9; border-radius: 10px; }
+  .se-price-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: #555; margin-bottom: 4px; }
+  .se-price-row.total { font-size: 16px; color: #1a1a1a; font-weight: 700; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e5e5; }
+  .se-price-row .strike { text-decoration: line-through; color: #aaa; margin-right: 6px; }
+
+  .se-add-btn { width: 100%; padding: 14px; background: #1a1a1a; color: #fff; border: 0; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .15s; }
+  .se-add-btn:hover:not(:disabled) { background: #000; }
+  .se-add-btn:disabled { background: #c8c8c8; cursor: not-allowed; }
+
+  .se-disclaimer { font-size: 11px; color: #999; margin-top: 12px; line-height: 1.5; }
+  .se-error { color: #dc2626; font-size: 13px; margin-top: 8px; display: none; }
+  .se-error.show { display: block; }
+</style>
+
+<div class="se-wrap">
+  <h1 class="se-h1">{{ page.title | default: 'Custom Sticker Editor' }}</h1>
+  <p class="se-sub">Upload your artwork to see a live preview of your die-cut sticker, including 3 mm bleed.</p>
+
+  <div class="se-grid">
+
+    <div>
+      <div class="se-stage" id="se-stage">
+        <div class="se-empty" id="se-empty">
+          <strong>Your preview will appear here</strong>
+          Upload an image to get started
+        </div>
+        <div class="se-stage-inner" id="se-stage-inner" style="display:none">
+          <canvas class="se-canvas" id="se-canvas"></canvas>
+          <div class="se-finish-coat" id="se-finish-coat"></div>
+          <div class="se-bleed-ring" id="se-bleed-ring"></div>
+          <div class="se-dim-label" id="se-dim-label">50 × 50 mm</div>
+        </div>
+      </div>
+      <p class="se-disclaimer">
+        Preview only — colours may vary slightly on print. The red dashed line indicates the 3 mm bleed area; keep important
+        details inside it. We will reach out if your file looks too small for clean printing at the chosen size.
+      </p>
+    </div>
+
+    <form id="se-form" novalidate>
+
+      <div class="se-field">
+        <label class="se-label" for="se-file">1. Upload your artwork</label>
+        <label class="se-upload" id="se-drop">
+          <input type="file" id="se-file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+          <div class="se-upload-icon">⬆</div>
+          <div class="se-upload-cta">Click to upload or drop a file</div>
+          <div class="se-upload-meta">PNG, JPG, WEBP or SVG · up to 20 MB</div>
+          <div class="se-filename" id="se-filename"></div>
+        </label>
+        <div class="se-error" id="se-file-error"></div>
+      </div>
+
+      <div class="se-field">
+        <label class="se-label">2. Size (mm)</label>
+        <div class="se-size-row">
+          <input class="se-input" type="number" id="se-w" min="20" max="500" step="1" value="50" inputmode="numeric">
+          <input class="se-input" type="number" id="se-h" min="20" max="500" step="1" value="50" inputmode="numeric">
+        </div>
+        <div class="se-hint">Width × Height. Anything 20–500 mm per side.</div>
+      </div>
+
+      <div class="se-field">
+        <label class="se-label">3. Finish</label>
+        <div class="se-segmented" id="se-finish">
+          <input type="radio" name="finish" id="se-fin-none" value="None" checked>
+          <label for="se-fin-none">No lamination</label>
+          <input type="radio" name="finish" id="se-fin-gloss" value="Glossy laminate">
+          <label for="se-fin-gloss">Glossy</label>
+          <input type="radio" name="finish" id="se-fin-matte" value="Matte laminate">
+          <label for="se-fin-matte">Matte</label>
+        </div>
+        <div class="se-hint">Lamination adds a protective layer and resists scratches and moisture.</div>
+      </div>
+
+      <div class="se-field">
+        <label class="se-label" for="se-qty">4. Quantity</label>
+        <div class="se-qty-row">
+          <button class="se-qty-btn" type="button" id="se-qty-dec" aria-label="Decrease">−</button>
+          <input class="se-qty-input" type="number" id="se-qty" min="1" max="10000" value="10" inputmode="numeric">
+          <button class="se-qty-btn" type="button" id="se-qty-inc" aria-label="Increase">+</button>
+        </div>
+        <div class="se-tiers" id="se-tiers"></div>
+      </div>
+
+      <div class="se-price-box">
+        <div class="se-price-row">
+          <span>Unit price</span>
+          <span id="se-unit-price">—</span>
+        </div>
+        <div class="se-price-row">
+          <span>Quantity</span>
+          <span id="se-qty-display">10</span>
+        </div>
+        <div class="se-price-row">
+          <span>Discount</span>
+          <span id="se-discount">—</span>
+        </div>
+        <div class="se-price-row total">
+          <span>Total</span>
+          <span id="se-total">—</span>
+        </div>
+        <div class="se-hint" id="se-finish-fee-note" style="margin-top:6px;display:none"></div>
+      </div>
+
+      <button class="se-add-btn" id="se-add" type="submit" disabled>Upload your artwork to continue</button>
+      <div class="se-error" id="se-add-error"></div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* ============ CONFIG ============ */
+
+  // Replace with your Shopify variant ID for the "Custom Stickers" product.
+  var STICKER_VARIANT_ID = 0000000000000;
+
+  // Currency comes from Shopify. Falls back to GBP if unavailable.
+  var CURRENCY = {{ shop.currency | json }} || 'GBP';
+  var LOCALE = {{ request.locale.iso_code | default: 'en-GB' | json }};
+
+  // Pricing: a tiny scaling rule so price feels fair as stickers get bigger.
+  // Price per sticker (at qty 1) = BASE + AREA_FACTOR * (width_mm * height_mm / 1000)
+  var BASE_PRICE = 1.50;        // minimum per sticker
+  var AREA_FACTOR = 0.45;       // per 1000 mm² of area
+  var FINISH_FEE = {             // added per sticker
+    'None': 0,
+    'Glossy laminate': 0.15,
+    'Matte laminate': 0.20
+  };
+
+  // Quantity discount tiers. Edit freely; the same thresholds must be
+  // set as automatic discounts in Shopify Admin so the cart matches.
+  var QUANTITY_TIERS = [
+    { min: 1,   max: 9,    pct: 0  },
+    { min: 10,  max: 49,   pct: 10 },
+    { min: 50,  max: 99,   pct: 20 },
+    { min: 100, max: 249,  pct: 30 },
+    { min: 250, max: 9999, pct: 40 }
+  ];
+
+  var MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
+
+  /* ============ STATE ============ */
+
+  var state = {
+    file: null,
+    image: null,              // HTMLImageElement once loaded
+    uploadedUrl: null,        // Shopify-hosted URL after async upload
+    widthMm: 50,
+    heightMm: 50,
+    qty: 10,
+    finish: 'None'
+  };
+
+  /* ============ DOM ============ */
+
+  var $ = function (id) { return document.getElementById(id); };
+  var stage = $('se-stage'), empty = $('se-empty'), stageInner = $('se-stage-inner');
+  var canvas = $('se-canvas'), coat = $('se-finish-coat'), dimLabel = $('se-dim-label');
+  var dropZone = $('se-drop'), fileInput = $('se-file'), fileName = $('se-filename');
+  var fileError = $('se-file-error'), addError = $('se-add-error');
+  var wIn = $('se-w'), hIn = $('se-h'), qtyIn = $('se-qty');
+  var qtyDec = $('se-qty-dec'), qtyInc = $('se-qty-inc');
+  var tiersEl = $('se-tiers');
+  var unitEl = $('se-unit-price'), qtyDisp = $('se-qty-display');
+  var discEl = $('se-discount'), totalEl = $('se-total'), feeNote = $('se-finish-fee-note');
+  var addBtn = $('se-add');
+
+  var ctx = canvas.getContext('2d');
+
+  /* ============ HELPERS ============ */
+
+  function money(n) {
+    try {
+      return new Intl.NumberFormat(LOCALE, { style: 'currency', currency: CURRENCY }).format(n);
+    } catch (e) {
+      return CURRENCY + ' ' + n.toFixed(2);
+    }
+  }
+
+  function activeTier(qty) {
+    for (var i = 0; i < QUANTITY_TIERS.length; i++) {
+      var t = QUANTITY_TIERS[i];
+      if (qty >= t.min && qty <= t.max) return t;
+    }
+    return QUANTITY_TIERS[QUANTITY_TIERS.length - 1];
+  }
+
+  function unitPrice() {
+    var area = state.widthMm * state.heightMm;
+    return BASE_PRICE + AREA_FACTOR * (area / 1000) + (FINISH_FEE[state.finish] || 0);
+  }
+
+  function renderTiers() {
+    var qty = state.qty;
+    tiersEl.innerHTML = QUANTITY_TIERS.map(function (t) {
+      var range = t.max >= 9999 ? (t.min + '+') : (t.min + '–' + t.max);
+      var active = (qty >= t.min && qty <= t.max) ? ' active' : '';
+      var pct = t.pct === 0 ? 'Standard' : ('−' + t.pct + '%');
+      return '<div class="se-tier' + active + '"><strong>' + pct + '</strong>' + range + '</div>';
+    }).join('');
+  }
+
+  function renderPrice() {
+    var u = unitPrice();
+    var tier = activeTier(state.qty);
+    var subtotal = u * state.qty;
+    var total = subtotal * (1 - tier.pct / 100);
+    var saved = subtotal - total;
+
+    unitEl.textContent = money(u);
+    qtyDisp.textContent = state.qty;
+    if (tier.pct > 0) {
+      discEl.innerHTML = '<span class="strike">' + money(subtotal) + '</span>−' + tier.pct + '% (' + money(saved) + ')';
+    } else {
+      discEl.textContent = '—';
+    }
+    totalEl.textContent = money(total);
+
+    var fee = FINISH_FEE[state.finish] || 0;
+    if (fee > 0) {
+      feeNote.style.display = 'block';
+      feeNote.textContent = state.finish + ' adds ' + money(fee) + ' per sticker.';
+    } else {
+      feeNote.style.display = 'none';
+    }
+  }
+
+  /* ============ PREVIEW RENDER ============ */
+
+  // Pixels per mm in the preview. The stage is ~500 px wide max.
+  function previewScale() {
+    var maxPx = 460;
+    var longest = Math.max(state.widthMm, state.heightMm);
+    return Math.min(8, maxPx / longest);
+  }
+
+  function renderPreview() {
+    if (!state.image) {
+      stageInner.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    stageInner.style.display = 'inline-block';
+
+    var bleedMm = 3;
+    var s = previewScale();
+    var W = Math.round((state.widthMm + bleedMm * 2) * s);
+    var H = Math.round((state.heightMm + bleedMm * 2) * s);
+
+    canvas.width = W;
+    canvas.height = H;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+
+    // White sticker base (the "die-cut" feel — uniform white sticker stock).
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    // Rounded rectangle as the sticker shape.
+    var radius = Math.min(W, H) * 0.04;
+    roundedRect(ctx, 0, 0, W, H, radius);
+    ctx.fill();
+
+    // Inner "trim" area where artwork lives (size minus bleed pad).
+    var pad = bleedMm * s; // bleed margin in px
+    var innerW = W - pad * 2;
+    var innerH = H - pad * 2;
+
+    // Fit-contain the uploaded image into the inner area, with a small
+    // safe-area inset so artwork is not flush against the cut line.
+    var safe = pad * 0.6;
+    var fitW = innerW - safe * 2;
+    var fitH = innerH - safe * 2;
+
+    var img = state.image;
+    var scale = Math.min(fitW / img.width, fitH / img.height);
+    var dw = img.width * scale;
+    var dh = img.height * scale;
+    var dx = pad + safe + (fitW - dw) / 2;
+    var dy = pad + safe + (fitH - dh) / 2;
+
+    ctx.save();
+    // Soft drop shadow to mimic a peeled sticker
+    ctx.shadowColor = 'rgba(0,0,0,0.15)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 2;
+    ctx.drawImage(img, dx, dy, dw, dh);
+    ctx.restore();
+
+    // Position the bleed dash ring at the bleed boundary (inset by pad).
+    var ring = $('se-bleed-ring');
+    ring.style.left = pad + 'px';
+    ring.style.top = pad + 'px';
+    ring.style.right = pad + 'px';
+    ring.style.bottom = pad + 'px';
+
+    // Position the finish coat over the trim (not the bleed).
+    coat.style.left = pad + 'px';
+    coat.style.top = pad + 'px';
+    coat.style.right = pad + 'px';
+    coat.style.bottom = pad + 'px';
+
+    dimLabel.textContent = state.widthMm + ' × ' + state.heightMm + ' mm  ·  +3 mm bleed';
+  }
+
+  function roundedRect(c, x, y, w, h, r) {
+    c.beginPath();
+    c.moveTo(x + r, y);
+    c.lineTo(x + w - r, y);
+    c.quadraticCurveTo(x + w, y, x + w, y + r);
+    c.lineTo(x + w, y + h - r);
+    c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    c.lineTo(x + r, y + h);
+    c.quadraticCurveTo(x, y + h, x, y + h - r);
+    c.lineTo(x, y + r);
+    c.quadraticCurveTo(x, y, x + r, y);
+    c.closePath();
+  }
+
+  function setFinishCoat(finish) {
+    coat.className = 'se-finish-coat';
+    if (finish === 'Glossy laminate') coat.classList.add('glossy');
+    else if (finish === 'Matte laminate') coat.classList.add('matte');
+  }
+
+  /* ============ FILE HANDLING ============ */
+
+  function loadFile(file) {
+    fileError.classList.remove('show');
+    if (!file) return;
+    if (!/^image\//.test(file.type)) {
+      fileError.textContent = 'Please upload an image file.';
+      fileError.classList.add('show');
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      fileError.textContent = 'File is too large (max 20 MB).';
+      fileError.classList.add('show');
+      return;
+    }
+    state.file = file;
+    state.uploadedUrl = null;
+    fileName.textContent = file.name + '  ·  ' + (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        state.image = img;
+        renderPreview();
+        updateAddButton();
+      };
+      img.onerror = function () {
+        fileError.textContent = 'Could not read that image.';
+        fileError.classList.add('show');
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ============ EVENTS ============ */
+
+  fileInput.addEventListener('change', function (e) {
+    loadFile(e.target.files[0]);
+  });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropZone.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation();
+      dropZone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropZone.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation();
+      dropZone.classList.remove('drag');
+    });
+  });
+  dropZone.addEventListener('drop', function (e) {
+    var f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) loadFile(f);
+  });
+
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+  wIn.addEventListener('input', function () {
+    state.widthMm = clamp(parseInt(wIn.value, 10) || 50, 20, 500);
+    renderPreview(); renderPrice();
+  });
+  hIn.addEventListener('input', function () {
+    state.heightMm = clamp(parseInt(hIn.value, 10) || 50, 20, 500);
+    renderPreview(); renderPrice();
+  });
+  qtyIn.addEventListener('input', function () {
+    state.qty = clamp(parseInt(qtyIn.value, 10) || 1, 1, 10000);
+    renderTiers(); renderPrice();
+  });
+  qtyDec.addEventListener('click', function () {
+    qtyIn.value = Math.max(1, (parseInt(qtyIn.value, 10) || 1) - 1);
+    qtyIn.dispatchEvent(new Event('input'));
+  });
+  qtyInc.addEventListener('click', function () {
+    qtyIn.value = Math.min(10000, (parseInt(qtyIn.value, 10) || 1) + 1);
+    qtyIn.dispatchEvent(new Event('input'));
+  });
+
+  document.querySelectorAll('input[name="finish"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      state.finish = r.value;
+      setFinishCoat(state.finish);
+      renderPrice();
+    });
+  });
+
+  function updateAddButton() {
+    if (state.file) {
+      addBtn.disabled = false;
+      addBtn.textContent = 'Add to cart';
+    } else {
+      addBtn.disabled = true;
+      addBtn.textContent = 'Upload your artwork to continue';
+    }
+  }
+
+  /* ============ ADD TO CART ============ */
+
+  // Uploads the chosen file to Shopify's async uploader so the URL
+  // can travel with the line item. If you would prefer to skip this
+  // (e.g. you collect artwork by email after order), set
+  // SKIP_UPLOAD = true and remove the URL property below.
+  var SKIP_UPLOAD = false;
+
+  function uploadToShopify(file) {
+    if (SKIP_UPLOAD) return Promise.resolve(null);
+    var form = new FormData();
+    form.append('file', file);
+    return fetch('/tools/async_uploader', { method: 'POST', body: form, credentials: 'same-origin' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Upload failed');
+        return r.json();
+      })
+      .then(function (data) { return data && (data.url || data.uploaded_image_url) || null; })
+      .catch(function () { return null; });
+  }
+
+  $('se-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    addError.classList.remove('show');
+    if (!state.file) return;
+    if (!STICKER_VARIANT_ID || STICKER_VARIANT_ID.toString().indexOf('0000') === 0) {
+      addError.textContent = 'Store not fully configured yet (missing variant ID). Please contact us.';
+      addError.classList.add('show');
+      return;
+    }
+
+    addBtn.disabled = true;
+    addBtn.textContent = 'Adding…';
+
+    uploadToShopify(state.file).then(function (url) {
+      var props = {
+        'Width (mm)': state.widthMm,
+        'Height (mm)': state.heightMm,
+        'Bleed (mm)': 3,
+        'Finish': state.finish,
+        'File name': state.file.name
+      };
+      if (url) props['Artwork'] = url;
+
+      var body = {
+        items: [{
+          id: STICKER_VARIANT_ID,
+          quantity: state.qty,
+          properties: props
+        }]
+      };
+      return fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(body)
+      });
+    }).then(function (r) {
+      if (!r || !r.ok) throw new Error('cart');
+      window.location.href = '/cart';
+    }).catch(function () {
+      addError.textContent = 'Sorry — could not add to cart. Please try again.';
+      addError.classList.add('show');
+      addBtn.disabled = false;
+      addBtn.textContent = 'Add to cart';
+    });
+  });
+
+  /* ============ INIT ============ */
+
+  renderTiers();
+  renderPrice();
+  updateAddButton();
+  setFinishCoat(state.finish);
+})();
+</script>
