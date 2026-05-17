@@ -262,7 +262,7 @@ button {
 }
 
 .btn-link::after {
-  content: "↗";
+  content: "â";
   font-size: 1.08em;
 }
 
@@ -356,13 +356,15 @@ button {
 .nav-main a {
   font-size: .82rem;
   font-weight: 700;
-  color: rgba(255,255,255,.62);
+  color: rgba(255,255,255,.92);
   position: relative;
+  text-shadow: 0 1px 4px rgba(0,0,0,.55);
   transition: color .25s ease;
 }
 
 .page-light .nav-main a {
-  color: rgba(10,74,60,.64);
+  color: rgba(10,74,60,.82);
+  text-shadow: none;
 }
 
 .nav-main a::after {
@@ -599,7 +601,7 @@ button {
   margin: 0;
   font-size: clamp(1rem, 1.5vw, 1.1rem);
   line-height: 1.8;
-  color: rgba(255,255,255,.72);
+  color: rgba(255,255,255,.92);
   max-width: 58ch;
 }
 
@@ -616,7 +618,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 18px;
-  color: rgba(255,255,255,.54);
+  color: rgba(255,255,255,.82);
   font-size: .86rem;
   font-weight: 600;
 }
@@ -1261,7 +1263,7 @@ button {
 }
 
 .break-overlay {
-  background: linear-gradient(180deg, rgba(8,16,12,.32) 0%, rgba(8,16,12,.6) 100%);
+  background: linear-gradient(180deg, rgba(8,16,12,.52) 0%, rgba(8,16,12,.80) 100%);
 }
 
 .break-content {
@@ -1691,7 +1693,7 @@ button {
 }
 
 .faq-card[open] summary::after {
-  content: "–";
+  content: "â";
 }
 
 .faq-card p {
@@ -1735,7 +1737,7 @@ button {
   display: none;
 }
 
-/* Lock card-on-image text to white — the cards live inside .light-section
+/* Lock card-on-image text to white â the cards live inside .light-section
    and would otherwise inherit --ink, becoming invisible on dark photos. */
 .services-page-card h3,
 .light-section .services-page-card h3,
@@ -2347,7 +2349,7 @@ button {
   color: var(--ink);
 }
 
-/* FAQ cards need to pop on cream — solid white + a soft shadow */
+/* FAQ cards need to pop on cream â solid white + a soft shadow */
 .light-section .faq-card,
 .page-light .faq-card {
   background: var(--white);
@@ -2384,7 +2386,7 @@ button {
   color: var(--forest);
 }
 
-/* Feature strip captions — subtle but readable on forest */
+/* Feature strip captions â subtle but readable on forest */
 .feature-item span {
   color: rgba(255,255,255,.75);
 }
@@ -2966,7 +2968,7 @@ html.has-announcement .site-header { top: 0; }
   font-size: .72rem;
 }
 
-/* Editorial "Services" grid section — lift onto cream */
+/* Editorial "Services" grid section â lift onto cream */
 .page-light .editorial-section {
   background: var(--paper);
   color: var(--ink);
@@ -2975,7 +2977,7 @@ html.has-announcement .site-header { top: 0; }
   color: rgba(12,26,21,.7);
 }
 
-/* "Why Outerworks" parallax — kill the parallax layer + dark overlay,
+/* "Why Outerworks" parallax â kill the parallax layer + dark overlay,
    replace with a calm cream section */
 .page-light .parallax-section {
   background: var(--paper);
@@ -2999,14 +3001,14 @@ html.has-announcement .site-header { top: 0; }
   background: rgba(242,183,89,.16);
 }
 
-/* Trust badges strip already on paper — add a divider */
+/* Trust badges strip already on paper â add a divider */
 .page-light .trust-badges {
   border-top: 1px solid rgba(10,74,60,.1);
   border-bottom: 1px solid rgba(10,74,60,.1);
 }
 
 /* Service cards: their bodies sit on a dark image + built-in gradient,
-   so they already render white text over photos — no change. */
+   so they already render white text over photos â no change. */
 
 /* Site header (transparent at top, solid-on-scroll): switch the scrolled
    state to cream with a subtle border */
@@ -3028,10 +3030,10 @@ html.has-announcement .site-header { top: 0; }
   color: var(--forest);
 }
 
-/* Contact band / coverage-section already use paper — fine.
+/* Contact band / coverage-section already use paper â fine.
    Light-section already overridden earlier. */
 
-/* Quote-promise band — keep it dark as a deliberate accent (it's the
+/* Quote-promise band â keep it dark as a deliberate accent (it's the
    one moment where the forest asserts itself on an otherwise cream page) */
 .page-light .quote-promise {
   background: var(--forest);
@@ -3049,9 +3051,9 @@ html.has-announcement .site-header { top: 0; }
 
 /* Quote-break pull quote: keep dark. Quote-section (final form): keep dark. */
 
-/* Announcement bar — already gold, fine */
+/* Announcement bar â already gold, fine */
 
-/* Service chip cloud on home (the row of extra services) — tidy for paper */
+/* Service chip cloud on home (the row of extra services) â tidy for paper */
 .page-light .service-chip-cloud a {
   color: var(--forest);
   background: rgba(10,74,60,.05);
@@ -3063,7 +3065,7 @@ html.has-announcement .site-header { top: 0; }
   border-color: var(--gold);
 }
 
-/* Split-bleed "How it works" — split-copy has its own dark panel
+/* Split-bleed "How it works" â split-copy has its own dark panel
    which stays. The light-section wrapper becomes cream (already handled). */
 
 /* Postcode checker on hero: hero still dark, so keep white-on-glass */
@@ -3096,7 +3098,7 @@ html.has-announcement .site-header { top: 0; }
   color: rgba(255,255,255,.78);
 }
 
-/* List stack on the home split-bleed — already styled by .split-copy (dark) */
+/* List stack on the home split-bleed â already styled by .split-copy (dark) */
 
 /* Footer: cream with thin top hairline, forest text */
 .page-light .site-footer {
@@ -3142,7 +3144,7 @@ html.has-announcement .site-header { top: 0; }
   border-color: var(--gold);
 }
 
-/* Editorial numbered eyebrow — pair nicely with the "01 — Services" style */
+/* Editorial numbered eyebrow â pair nicely with the "01 â Services" style */
 .page-light .eyebrow {
   font-size: .74rem;
   letter-spacing: .22em;
@@ -3150,7 +3152,7 @@ html.has-announcement .site-header { top: 0; }
 
 /* Contrast safeguards for DARK sections on an otherwise light page.
    The broad .page-light overrides above flip eyebrow / section-lead /
-   section-title-em to dark amber or ink — unreadable when the section
+   section-title-em to dark amber or ink â unreadable when the section
    itself stays dark (hero, page-hero, split-copy panel, quote-break
    pull quote, final quote-section form). Restore light text here. */
 
