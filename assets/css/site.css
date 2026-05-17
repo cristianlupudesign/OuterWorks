@@ -262,7 +262,7 @@ button {
 }
 
 .btn-link::after {
-  content: "â";
+  content: "\2192";
   font-size: 1.08em;
 }
 
@@ -510,6 +510,7 @@ button {
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
+  background: #1a3c34;
 }
 
 .page-hero {
@@ -550,7 +551,7 @@ button {
 }
 
 .page-hero-overlay {
-  background: linear-gradient(180deg, rgba(8,16,12,.18) 0%, rgba(8,16,12,.5) 48%, rgba(8,16,12,.9) 100%);
+  background: linear-gradient(180deg, rgba(8,16,12,.52) 0%, rgba(8,16,12,.72) 48%, rgba(8,16,12,.94) 100%);
 }
 
 .hero-content,
@@ -2979,26 +2980,28 @@ html.has-announcement .site-header { top: 0; }
 
 /* "Why Outerworks" parallax â kill the parallax layer + dark overlay,
    replace with a calm cream section */
-.page-light .parallax-section {
-  background: var(--paper);
-  color: var(--ink);
-}
 .page-light .parallax-section .parallax-layer {
   display: none;
 }
-.page-light .parallax-section .parallax-content {
-  padding-top: 0;
-  padding-bottom: 0;
+.page-light .parallax-section .section-title,
+.page-light .parallax-section .eyebrow {
+  color: var(--white);
+}
+.page-light .parallax-section .section-title em {
+  color: var(--gold-2);
+}
+.page-light .parallax-section .section-lead {
+  color: rgba(255,255,255,.82);
 }
 .page-light .parallax-section .point-row h3 {
-  color: var(--ink);
+  color: var(--white);
 }
 .page-light .parallax-section .point-row p {
-  color: rgba(12,26,21,.7);
+  color: rgba(255,255,255,.78);
 }
 .page-light .parallax-section .point-icon {
-  color: var(--gold-ink);
-  background: rgba(242,183,89,.16);
+  color: var(--gold-2);
+  background: rgba(242,183,89,.12);
 }
 
 /* Trust badges strip already on paper â add a divider */
