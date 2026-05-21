@@ -315,11 +315,22 @@ button {
   min-width: 0;
 }
 
-.nav-brand img {
+.nav-brand img:not(.brand-logo) {
   width: 34px;
   height: 34px;
   object-fit: contain;
   filter: drop-shadow(0 6px 14px rgba(0,0,0,.18));
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.page-light .site-header.is-scrolled .brand-logo {
+  filter: none;
 }
 
 .brand-wordmark {
@@ -1860,7 +1871,7 @@ button {
   margin-bottom: 14px;
 }
 
-.footer-brand-row img {
+.footer-brand-row img:not(.brand-logo) {
   width: 36px;
   height: 36px;
 }
