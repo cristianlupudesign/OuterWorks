@@ -180,7 +180,7 @@ button {
   margin: 0;
   font-size: 1rem;
   line-height: 1.8;
-  color: rgba(255,255,255,.68);
+  color: rgba(255,255,255,.84);
   max-width: 62ch;
 }
 
@@ -869,7 +869,7 @@ button {
 .faq-card p,
 .mini-card p {
   margin: 8px 0 0;
-  color: rgba(255,255,255,.64);
+  color: rgba(255,255,255,.84);
   font-size: .94rem;
   line-height: 1.75;
 }
@@ -879,7 +879,6 @@ button {
 .page-light .value-card p,
 .page-light .scope-card p,
 .page-light .contact-card p,
-.page-light .related-card p,
 .page-light .faq-card p,
 .page-light .mini-card p,
 .light-section .list-row p,
@@ -887,10 +886,9 @@ button {
 .light-section .value-card p,
 .light-section .scope-card p,
 .light-section .contact-card p,
-.light-section .related-card p,
 .light-section .faq-card p,
 .light-section .mini-card p {
-  color: rgba(21,26,23,.68);
+  color: rgba(12,26,21,.84);
 }
 
 /* Editorial service grid */
@@ -990,7 +988,7 @@ button {
 .service-card p {
   max-width: 40ch;
   margin: 0;
-  color: rgba(255,255,255,.68);
+  color: rgba(255,255,255,.88);
   line-height: 1.7;
   font-size: .92rem;
   max-height: 0;
@@ -1223,7 +1221,7 @@ button {
 
 .point-row p {
   margin: 8px 0 0;
-  color: rgba(255,255,255,.66);
+  color: rgba(255,255,255,.84);
   line-height: 1.7;
 }
 
@@ -1261,7 +1259,7 @@ button {
 
 .stat-card p {
   margin: 10px 0 0;
-  color: rgba(255,255,255,.64);
+  color: rgba(255,255,255,.84);
   line-height: 1.75;
 }
 
@@ -1339,7 +1337,7 @@ button {
 
 .process-step p {
   margin: 10px 0 0;
-  color: rgba(255,255,255,.62);
+  color: rgba(255,255,255,.84);
   line-height: 1.72;
   font-size: .94rem;
 }
@@ -1413,7 +1411,7 @@ button {
 
 .coverage-callout-body p {
   margin: 0 0 18px;
-  color: rgba(255,255,255,.68);
+  color: rgba(255,255,255,.86);
   line-height: 1.75;
 }
 
@@ -1507,7 +1505,7 @@ button {
   font-weight: 800;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--clay);
+  color: var(--forest);
 }
 
 .field input,
@@ -1538,7 +1536,7 @@ button {
 
 .form-help {
   margin: 10px 0 0;
-  color: rgba(21,26,23,.62);
+  color: rgba(12,26,21,.82);
   line-height: 1.65;
   font-size: .85rem;
 }
@@ -1554,7 +1552,7 @@ button {
 .form-status {
   min-height: 1.4em;
   margin: 8px 0 0;
-  color: rgba(21,26,23,.72);
+  color: rgba(12,26,21,.88);
   font-size: .88rem;
 }
 
@@ -1640,7 +1638,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,16,12,.1) 0%, rgba(10,16,12,.45) 50%, rgba(10,16,12,.95) 100%);
+  background: linear-gradient(180deg, rgba(10,16,12,.15) 0%, rgba(10,16,12,.55) 55%, rgba(10,16,12,.96) 100%);
   z-index: 1;
 }
 
@@ -1739,7 +1737,7 @@ button {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10,16,12,.05) 0%, rgba(10,16,12,.35) 45%, rgba(10,16,12,.96) 100%),
+    linear-gradient(180deg, rgba(10,16,12,.15) 0%, rgba(10,16,12,.5) 50%, rgba(10,16,12,.96) 100%),
     linear-gradient(180deg, rgba(10,74,60,0) 55%, rgba(10,74,60,.55) 100%);
   z-index: 1;
 }
@@ -1836,14 +1834,14 @@ button {
 
 .cta-panel p {
   margin: 0 0 22px;
-  color: rgba(255,255,255,.7);
+  color: rgba(255,255,255,.86);
   line-height: 1.8;
   max-width: 56ch;
 }
 
 .page-light .cta-panel p,
 .light-section .cta-panel p {
-  color: rgba(21,26,23,.68);
+  color: rgba(12,26,21,.84);
 }
 
 /* Footer */
@@ -1878,7 +1876,7 @@ button {
 
 .footer-brand p {
   margin: 0 0 18px;
-  color: rgba(255,255,255,.58);
+  color: rgba(255,255,255,.82);
   line-height: 1.75;
 }
 
@@ -1889,14 +1887,14 @@ button {
 
 .footer-contact a,
 .footer-contact span {
-  color: rgba(255,255,255,.62);
+  color: rgba(255,255,255,.85);
   font-weight: 600;
 }
 
 .footer-col h3 {
   margin: 0 0 16px;
   font-size: .76rem;
-  color: rgba(255,255,255,.34);
+  color: rgba(255,255,255,.78);
   text-transform: uppercase;
   letter-spacing: .2em;
 }
@@ -1924,7 +1922,7 @@ button {
   flex-direction: column;
   gap: 10px;
   padding-top: 24px;
-  color: rgba(255,255,255,.34);
+  color: rgba(255,255,255,.72);
   font-size: .84rem;
 }
 
@@ -1935,11 +1933,11 @@ button {
 }
 
 .footer-bottom a {
-  color: rgba(255,255,255,.42);
+  color: rgba(255,255,255,.82);
 }
 
 .footer-bottom a:hover {
-  color: rgba(255,255,255,.72);
+  color: var(--white);
 }
 
 /* Legal */
@@ -2141,7 +2139,7 @@ button {
 .split-copy .section-lead,
 .split-copy .copy-lead,
 .split-copy .list-row p {
-  color: rgba(255,255,255,.68);
+  color: rgba(255,255,255,.84);
 }
 
 @media (max-width: 979px) {
@@ -2300,10 +2298,42 @@ button {
 
 /* "View service" / card links on light surfaces */
 .light-section .btn-link,
-.page-light .btn-link,
-.related-card .btn-link,
-.services-page-card .btn-link {
+.page-light .btn-link {
   color: var(--gold-ink);
+}
+
+/* Related / services-page cards live on a dark photo overlay even on
+   light pages, so their text must stay white and links must stay light. */
+.page-light .related-card h3,
+.light-section .related-card h3,
+.page-light .services-page-card h3,
+.light-section .services-page-card h3 {
+  color: #fff;
+}
+
+.page-light .related-card p,
+.light-section .related-card p,
+.page-light .services-page-card p,
+.light-section .services-page-card p {
+  color: rgba(255,255,255,.88);
+}
+
+.related-card .btn-link,
+.page-light .related-card .btn-link,
+.light-section .related-card .btn-link,
+.services-page-card .btn-link,
+.page-light .services-page-card .btn-link,
+.light-section .services-page-card .btn-link {
+  color: var(--gold-2);
+}
+
+.related-card h3,
+.related-card p,
+.related-card .btn-link,
+.services-page-card h3,
+.services-page-card p,
+.services-page-card .btn-link {
+  text-shadow: 0 2px 12px rgba(0,0,0,.7), 0 0 2px rgba(0,0,0,.5);
 }
 
 /* FAQ "+" marker on light section */
@@ -2408,7 +2438,7 @@ button {
   color: rgba(255,255,255,.82);
 }
 .hero-scroll {
-  color: rgba(255,255,255,.58);
+  color: rgba(255,255,255,.78);
 }
 .breadcrumbs {
   color: rgba(255,255,255,.78);
@@ -2673,7 +2703,7 @@ textarea::placeholder {
   margin: 28px 0 0;
   text-align: center;
   font-size: .92rem;
-  color: rgba(12,26,21,.6);
+  color: rgba(12,26,21,.84);
 }
 
 .gallery-note a {
@@ -2818,7 +2848,7 @@ html.has-announcement .site-header { top: 0; }
   letter-spacing: .02em;
   outline: none;
 }
-.postcode-check input::placeholder { color: rgba(255,255,255,.55); }
+.postcode-check input::placeholder { color: rgba(255,255,255,.78); }
 .postcode-check button {
   border: 0;
   padding: 10px 18px;
@@ -3032,11 +3062,11 @@ html.has-announcement .site-header { top: 0; }
   box-shadow: 0 10px 24px rgba(10,74,60,.06);
 }
 .page-light .nav-main a {
-  color: rgba(10,74,60,.72);
+  color: var(--forest);
 }
 .page-light .nav-main a:hover,
 .page-light .nav-main a.is-active {
-  color: var(--forest);
+  color: var(--ink);
 }
 .page-light .nav-toggle {
   border-color: rgba(10,74,60,.16);
@@ -3125,10 +3155,10 @@ html.has-announcement .site-header { top: 0; }
 .page-light .site-footer .footer-contact a,
 .page-light .site-footer .footer-contact span,
 .page-light .site-footer .footer-bottom {
-  color: rgba(10,74,60,.7);
+  color: var(--forest);
 }
 .page-light .site-footer .footer-brand p {
-  color: rgba(10,74,60,.7);
+  color: var(--forest);
 }
 .page-light .site-footer h3 {
   color: var(--forest);
@@ -3144,8 +3174,12 @@ html.has-announcement .site-header { top: 0; }
   border-top: 1px solid rgba(10,74,60,.08);
 }
 .page-light .site-footer .footer-col a:hover,
-.page-light .site-footer .footer-contact a:hover {
+.page-light .site-footer .footer-contact a:hover,
+.page-light .site-footer .footer-bottom a:hover {
   color: var(--gold-ink);
+}
+.page-light .site-footer .footer-bottom a {
+  color: var(--forest);
 }
 .page-light .site-footer .footer-social a {
   border-color: rgba(10,74,60,.15);
