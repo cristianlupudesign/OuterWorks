@@ -29,18 +29,19 @@ GitHub-ready multipage site for Outerworks with shared CSS/JS, responsive naviga
 
 ## Before publishing
 
-### 1) Connect Formspree
-Edit this file:
+### 1) Enquiry form delivery (already wired)
+All quote forms send to `contact@outerworks.co.uk` via FormSubmit — no account needed.
 
-`assets/js/config.js`
+**One-time step:** the first enquiry submitted on the live site triggers an
+activation email from formsubmit.co to that inbox. Click the link in it once
+and every enquiry after that is delivered normally. Submit a test enquiry
+yourself after deploying to trigger it.
 
-Replace:
+If you ever switch to Formspree, paste your `https://formspree.io/f/...`
+endpoint into `assets/js/config.js` — all forms use that one config value.
 
-`https://formspree.io/f/your-form-id`
-
-with your real Formspree endpoint.
-
-All quote forms use that one config value.
+If the form service is unreachable, the form automatically offers the visitor
+a pre-filled WhatsApp message containing their enquiry, so no lead is lost.
 
 ### 2) Review legal text
 Privacy, Terms and Cookies pages are solid starter pages, but they should still be reviewed against your exact live setup.

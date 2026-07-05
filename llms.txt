@@ -14,7 +14,7 @@
 - **Instagram:** https://www.instagram.com/outerworksltd
 - **Facebook:** https://www.facebook.com/share/14Yw1iWGkBv/
 - **LinkedIn:** https://www.linkedin.com/company/outerworks
-- **Leave a Google review:** https://search.google.com/local/writereview?placeid=YOUR_GOOGLE_PLACE_ID
+- **Find us on Google:** https://www.google.com/maps/search/?api=1&query=Outerworks+West+London
 
 ## How it works
 
@@ -45,6 +45,17 @@
 - [Areas We Cover](https://outerworks.co.uk/areas/)
 - [About](https://outerworks.co.uk/about/)
 - [Contact / Free Quote](https://outerworks.co.uk/contact/)
+
+## Local area pages
+
+- [Ruislip](https://outerworks.co.uk/areas/ruislip/) — the home patch (HA4)
+- [Uxbridge](https://outerworks.co.uk/areas/uxbridge/) — UB8 and UB10
+- [Harrow](https://outerworks.co.uk/areas/harrow/) — HA1 to HA3
+- [Ealing](https://outerworks.co.uk/areas/ealing/) — W5 and W13
+- [Northolt](https://outerworks.co.uk/areas/northolt/) — UB5
+- [Pinner](https://outerworks.co.uk/areas/pinner/) — HA5
+- [Greenford](https://outerworks.co.uk/areas/greenford/) — UB6
+- [Wembley](https://outerworks.co.uk/areas/wembley/) — HA0 and HA9
 
 ## Common questions
 

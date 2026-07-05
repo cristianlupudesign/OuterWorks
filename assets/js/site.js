@@ -225,12 +225,40 @@
     });
   }
 
+  // Builds a wa.me link carrying the enquiry so a lead survives even if the
+  // form service is unavailable.
+  function whatsappFallbackUrl(form) {
+    const number = config.whatsappNumber || '447348580359';
+    const data = new FormData(form);
+    const lines = ['Hi Outerworks, I would like a quote.'];
+    const name = [data.get('first_name'), data.get('last_name')].filter(Boolean).join(' ');
+    if (name) lines.push('Name: ' + name);
+    if (data.get('phone')) lines.push('Phone: ' + data.get('phone'));
+    if (data.get('postcode')) lines.push('Postcode: ' + data.get('postcode'));
+    if (data.get('service')) lines.push('Service: ' + data.get('service'));
+    if (data.get('message')) lines.push('Job: ' + data.get('message'));
+    return 'https://wa.me/' + number + '?text=' + encodeURIComponent(lines.join('\n'));
+  }
+
+  function showFallback(form) {
+    const status = form.querySelector('[data-form-status]');
+    if (!status) return;
+    status.classList.remove('is-success');
+    status.classList.add('is-error');
+    status.innerHTML = 'That did not go through — but your enquiry is not lost. '
+      + `<a href="${whatsappFallbackUrl(form)}" target="_blank" rel="noopener" style="font-weight:700; text-decoration:underline; color:inherit;">Send it on WhatsApp instead</a> `
+      + 'or call <a href="tel:07348580359" style="font-weight:700; text-decoration:underline; color:inherit;">07348 580359</a>.';
+  }
+
   forms.forEach(form => {
     form.addEventListener('submit', async function (event) {
       event.preventDefault();
 
       if (!endpoint || endpoint.includes('your-form-id')) {
-        setStatus(form, 'Add your Formspree endpoint in assets/js/config.js before going live.', 'error');
+        // No delivery endpoint configured — hand the enquiry to WhatsApp
+        // instead of dead-ending the visitor.
+        window.open(whatsappFallbackUrl(form), '_blank', 'noopener');
+        setStatus(form, 'We have opened WhatsApp with your enquiry ready to send.', 'success');
         return;
       }
 
@@ -239,6 +267,16 @@
       const formData = new FormData(form);
       formData.append('_subject', 'New enquiry from the Outerworks website');
       formData.append('page_url', window.location.href);
+
+      if (endpoint.includes('formsubmit.co')) {
+        formData.append('_template', 'table');
+        formData.append('_captcha', 'false');
+        const email = formData.get('email');
+        if (email) formData.append('_replyto', email);
+        const gotcha = formData.get('_gotcha');
+        formData.append('_honey', gotcha || '');
+        formData.delete('_gotcha');
+      }
 
       try {
         if (submit) {
@@ -263,7 +301,7 @@
           window.location.href = `${basePrefix}thank-you/`;
         }, 300);
       } catch (error) {
-        setStatus(form, 'That did not go through. Please try again or contact us directly by phone or WhatsApp.', 'error');
+        showFallback(form);
       } finally {
         if (submit) {
           submit.disabled = false;
