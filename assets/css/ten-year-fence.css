@@ -478,3 +478,125 @@
 .tyf .prose { max-width: 760px; }
 .tyf .prose h2 { font-family: var(--font-head); color: var(--forest); font-size: 1.5rem; margin: 30px 0 10px; }
 .tyf .prose p, .tyf .prose li { color: var(--ink-soft); line-height: 1.7; }
+
+/* ============================================================
+   Hormozi "Grand Slam Offer" components (conversion pages).
+   Direct-response structure on the same brand tokens.
+   ============================================================ */
+
+/* Hero — big promise + risk-reversal chips */
+.tyf .tyf-hero h1.promise { font-size: clamp(2.6rem, 6.4vw, 5rem); max-width: 18ch; }
+.tyf .risk-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.tyf .risk-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: .82rem; font-weight: 600; color: rgba(245,240,232,.92);
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+  padding: 7px 13px; border-radius: 999px;
+}
+.tyf .risk-chip svg { width: 15px; height: 15px; color: var(--gold-2); }
+
+/* Section eyebrow "kicker" bigger for DR pages */
+.tyf .hz-kicker {
+  display: inline-block; font-family: var(--font-head); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em; font-size: .82rem;
+  color: var(--gold-ink, #8a571a); background: rgba(200,145,42,.12);
+  border: 1px solid rgba(200,145,42,.28); padding: 6px 14px; border-radius: 999px; margin: 0 0 16px;
+}
+
+/* Problem / agitate cards */
+.tyf .problem-grid { display: grid; gap: 16px; margin-top: 30px; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .tyf .problem-grid { grid-template-columns: repeat(3, 1fr); } }
+.tyf .problem-card {
+  background: #fff; border: 1px solid var(--pebble); border-left: 4px solid #b23b2e;
+  border-radius: var(--radius-md); padding: 24px 22px;
+}
+.tyf .problem-card .px {
+  width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center;
+  background: rgba(178,59,46,.1); color: #b23b2e; margin-bottom: 12px; font-weight: 800;
+}
+.tyf .problem-card .px svg { width: 18px; height: 18px; }
+.tyf .problem-card h3 { font-family: var(--font-head); color: var(--ink); font-size: 1.3rem; margin: 0 0 6px; font-weight: 700; }
+.tyf .problem-card p { margin: 0; color: var(--ink-soft); font-size: .96rem; }
+.tyf .problem-foot { margin-top: 22px; font-size: 1.12rem; color: var(--ink); font-weight: 600; }
+.tyf .problem-foot b { color: var(--forest); }
+
+/* The Grand Slam Offer — value stack with anchors */
+.tyf .offer-stack {
+  background: #fff; border: 2px solid var(--gold); border-radius: var(--radius-lg);
+  box-shadow: 0 30px 70px rgba(200,145,42,.16); overflow: hidden; max-width: 720px; margin-top: 30px;
+}
+.tyf .offer-stack-head {
+  background: linear-gradient(150deg, var(--forest), var(--moss)); color: #fff;
+  padding: 22px 26px;
+}
+.tyf .offer-stack-head h3 { font-family: var(--font-head); font-size: 1.5rem; margin: 0; font-weight: 700; color:#fff; }
+.tyf .offer-stack-head p { margin: 4px 0 0; color: rgba(245,240,232,.85); font-size: .95rem; }
+.tyf .stack-rows { padding: 8px 26px; }
+.tyf .stack-row {
+  display: flex; align-items: flex-start; gap: 12px; padding: 14px 0;
+  border-bottom: 1px solid var(--pebble);
+}
+.tyf .stack-row:last-child { border-bottom: 0; }
+.tyf .stack-row .sr-tick { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 999px; background: var(--forest); color:#fff; display: grid; place-items: center; margin-top: 1px; }
+.tyf .stack-row .sr-tick svg { width: 14px; height: 14px; }
+.tyf .stack-row .sr-main { flex: 1; }
+.tyf .stack-row .sr-main b { display: block; color: var(--ink); font-weight: 700; }
+.tyf .stack-row .sr-main span { color: var(--ink-soft); font-size: .92rem; }
+.tyf .stack-row .sr-val {
+  flex: 0 0 auto; font-family: var(--font-head); font-weight: 700; color: var(--gold-ink, #8a571a);
+  font-size: 1rem; white-space: nowrap; padding-top: 1px;
+}
+.tyf .stack-total {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 18px 26px; background: var(--stone); border-top: 2px dashed var(--gold);
+}
+.tyf .stack-total .st-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; color: var(--ink-soft); }
+.tyf .stack-total .st-val { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--ink); text-decoration: line-through; text-decoration-color: rgba(178,59,46,.6); }
+.tyf .stack-price { padding: 22px 26px; text-align: center; }
+.tyf .stack-price .sp-lead { font-size: .95rem; color: var(--clay); margin: 0 0 4px; }
+.tyf .stack-price .sp-amount { font-family: var(--font-head); font-size: 2.8rem; line-height: 1; font-weight: 700; color: var(--forest); margin: 0; }
+.tyf .stack-price .sp-amount .unit { font-size: 1.1rem; color: var(--clay); font-weight: 500; }
+.tyf .stack-price .btn { margin-top: 18px; width: 100%; }
+.tyf .stack-price .sp-note { font-size: .82rem; color: var(--clay); margin-top: 10px; }
+
+/* Guarantee stack — risk reversal bars */
+.tyf .gtee-stack { display: grid; gap: 14px; margin-top: 28px; }
+.tyf .gtee-bar {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md);
+  padding: 20px 22px; border-left: 4px solid var(--gold);
+}
+.tyf .gtee-bar .gb-ico { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 12px; background: rgba(200,145,42,.14); color: var(--gold-ink, #8a571a); display: grid; place-items: center; }
+.tyf .gtee-bar .gb-ico svg { width: 24px; height: 24px; }
+.tyf .gtee-bar h3 { font-family: var(--font-head); color: var(--forest); font-size: 1.3rem; margin: 0 0 4px; font-weight: 700; }
+.tyf .gtee-bar p { margin: 0; color: var(--ink-soft); font-size: .96rem; }
+.tyf .gtee-headline { margin-top: 26px; text-align: center; font-family: var(--font-head); font-size: clamp(1.4rem,3vw,2rem); color: var(--forest); font-weight: 700; }
+
+/* Comparison — us vs the cheapest quote */
+.tyf .compare {
+  margin-top: 30px; background: #fff; border: 1px solid var(--pebble);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.tyf .compare table { width: 100%; border-collapse: collapse; }
+.tyf .compare th, .tyf .compare td { padding: 14px 16px; text-align: left; font-size: .95rem; border-bottom: 1px solid var(--pebble); }
+.tyf .compare thead th { font-family: var(--font-head); font-size: 1rem; text-transform: uppercase; letter-spacing: .04em; }
+.tyf .compare thead th.us { background: var(--forest); color: #fff; }
+.tyf .compare thead th.them { background: var(--pebble); color: var(--ink-soft); }
+.tyf .compare td.us { background: rgba(19,115,58,.05); color: var(--ink); font-weight: 600; }
+.tyf .compare td.them { color: var(--clay); }
+.tyf .compare td.row-label { font-weight: 600; color: var(--ink); }
+.tyf .compare .cy { color: var(--forest); font-weight: 800; }
+.tyf .compare .cn { color: #b23b2e; font-weight: 800; }
+.tyf .compare tr:last-child td { border-bottom: 0; }
+
+/* Scarcity / capacity band (honest — owner sets the number) */
+.tyf .scarcity {
+  display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+  background: linear-gradient(150deg, var(--bark), #35291d); color: var(--stone);
+  border-radius: var(--radius-lg); padding: 26px 30px; margin-top: 30px;
+}
+.tyf .scarcity .sc-main { display: flex; gap: 16px; align-items: center; }
+.tyf .scarcity .sc-dot { width: 12px; height: 12px; border-radius: 999px; background: var(--gold-2); box-shadow: 0 0 0 6px rgba(232,184,75,.18); flex: 0 0 auto; }
+.tyf .scarcity b { color: #fff; font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; }
+.tyf .scarcity p { margin: 2px 0 0; color: rgba(245,240,232,.82); font-size: .92rem; }
+.tyf .scarcity .btn { flex: 0 0 auto; }
