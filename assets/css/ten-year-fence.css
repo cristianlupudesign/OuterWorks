@@ -299,3 +299,182 @@
   color: #8a5a00; background: #ffe9c2; border: 1px solid #f0c869;
   padding: 1px 7px; border-radius: 6px; vertical-align: middle;
 }
+
+/* ============================================================
+   Site-wide component library for the rebuilt Outerworks site.
+   All scoped under .tyf (every page carries `tyf` on <body>),
+   built on the same exact brand tokens above.
+   ============================================================ */
+
+/* Nav — highlight the offer link */
+.tyf .nav-main .nav-offer,
+.tyf .mobile-nav .nav-offer {
+  color: var(--gold-ink, #8a571a); font-weight: 700;
+}
+.tyf .nav-main .nav-offer { position: relative; }
+
+/* Centered section head */
+.tyf .tyf-head { max-width: 760px; }
+.tyf .tyf-head.center { margin-inline: auto; text-align: center; }
+.tyf .tyf-head.center .tyf-lead { margin-inline: auto; }
+
+/* Hero variant with a photo background (home + service pages) */
+.tyf .tyf-hero.has-media { padding-top: clamp(104px, 15vh, 168px); }
+.tyf .tyf-hero-media {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+}
+.tyf .tyf-hero-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(150deg, rgba(11,61,34,.92) 0%, rgba(19,115,58,.78) 55%, rgba(11,61,34,.9) 100%);
+}
+.tyf .tyf-hero.has-media .container { position: relative; z-index: 2; }
+.tyf .tyf-hero.has-media::after { z-index: 1; }
+.tyf .tyf-hero-eyebrow-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+
+/* Trust strip — qualitative, no fabricated numbers */
+.tyf .trust-strip {
+  display: grid; gap: 14px; margin-top: 30px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .tyf .trust-strip { grid-template-columns: repeat(4, 1fr); } }
+.tyf .trust-item { display: flex; gap: 12px; align-items: center; }
+.tyf .trust-item .ti-ico {
+  flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center; background: rgba(19,115,58,.08); color: var(--forest);
+}
+.tyf .trust-item .ti-ico svg { width: 22px; height: 22px; }
+.tyf .trust-item b { display: block; color: var(--ink); font-size: .98rem; }
+.tyf .trust-item span { color: var(--clay); font-size: .85rem; }
+
+/* Services grid */
+.tyf .svc-grid {
+  display: grid; gap: 18px; margin-top: 30px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 620px) { .tyf .svc-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .tyf .svc-grid { grid-template-columns: repeat(3, 1fr); } }
+.tyf .svc-card {
+  display: flex; flex-direction: column; gap: 10px;
+  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md);
+  padding: 24px 22px; box-shadow: 0 14px 34px rgba(19,115,58,.05);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
+}
+.tyf .svc-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(19,115,58,.12); border-color: rgba(200,145,42,.4); }
+.tyf .svc-card .svc-ico {
+  width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--forest); color: #fff; margin-bottom: 4px;
+}
+.tyf .svc-card .svc-ico svg { width: 24px; height: 24px; }
+.tyf .svc-card h3 { font-family: var(--font-head); color: var(--forest); font-size: 1.4rem; margin: 0; font-weight: 700; }
+.tyf .svc-card p { margin: 0; color: var(--ink-soft); font-size: .96rem; flex: 1; }
+.tyf .svc-card .svc-link {
+  font-family: var(--font-head); font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  font-size: .82rem; color: var(--gold-ink, #8a571a); display: inline-flex; align-items: center; gap: 6px;
+}
+.tyf .svc-card .svc-link::after { content: "\2192"; }
+
+/* Numbered steps */
+.tyf .tyf-steps {
+  display: grid; gap: 18px; margin-top: 30px; counter-reset: step;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) { .tyf .tyf-steps { grid-template-columns: repeat(3, 1fr); } }
+.tyf .tyf-steps.four { }
+@media (min-width: 900px) { .tyf .tyf-steps.four { grid-template-columns: repeat(4, 1fr); } }
+.tyf .step {
+  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 24px 22px;
+}
+.tyf .step .step-n {
+  width: 42px; height: 42px; border-radius: 999px; display: grid; place-items: center;
+  background: rgba(200,145,42,.14); color: var(--gold-ink, #8a571a);
+  font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; margin-bottom: 14px;
+}
+.tyf .step h3 { font-family: var(--font-head); color: var(--forest); font-size: 1.25rem; margin: 0 0 6px; font-weight: 700; }
+.tyf .step p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+
+/* Split feature row (text + photo) */
+.tyf .tyf-split { display: grid; gap: 30px; align-items: center; grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .tyf .tyf-split { grid-template-columns: 1fr 1fr; gap: 46px; }
+  .tyf .tyf-split.reverse .tyf-split-media { order: -1; }
+}
+.tyf .tyf-split-media {
+  border-radius: var(--radius-lg); overflow: hidden; min-height: 300px;
+  background-size: cover; background-position: center;
+  box-shadow: var(--shadow-soft); border: 1px solid var(--pebble);
+}
+.tyf .tyf-check { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+.tyf .tyf-check li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-soft); }
+.tyf .tyf-check li svg { flex: 0 0 auto; width: 22px; height: 22px; color: var(--forest); margin-top: 1px; }
+.tyf .tyf-check li b { color: var(--ink); }
+
+/* Coverage / area grid */
+.tyf .area-grid { display: grid; gap: 12px; margin-top: 26px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 620px) { .tyf .area-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .tyf .area-grid { grid-template-columns: repeat(4, 1fr); } }
+.tyf .area-tile {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-sm);
+  padding: 14px 16px; font-weight: 600; color: var(--forest);
+  transition: border-color .2s, transform .2s;
+}
+.tyf a.area-tile:hover { border-color: var(--gold); transform: translateY(-2px); }
+.tyf .area-tile .at-pc { font-size: .78rem; color: var(--clay); font-weight: 600; }
+.tyf .area-tile.todo { color: var(--clay); }
+
+/* Gallery grid (real photos) */
+.tyf .gal-grid { display: grid; gap: 14px; margin-top: 28px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .tyf .gal-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .tyf .gal-grid { grid-template-columns: repeat(3, 1fr); } }
+.tyf .gal-item {
+  position: relative; border-radius: var(--radius-md); overflow: hidden;
+  aspect-ratio: 4 / 3; background: var(--pebble) center/cover no-repeat; border: 1px solid var(--pebble);
+}
+.tyf .gal-item span {
+  position: absolute; left: 12px; bottom: 12px; z-index: 2;
+  font-family: var(--font-head); font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  font-size: .74rem; color: #fff; background: rgba(11,61,34,.72); padding: 4px 10px; border-radius: 999px;
+}
+
+/* CTA band */
+.tyf .cta-band {
+  background: linear-gradient(150deg, var(--forest) 0%, var(--moss) 70%, var(--forest-2) 100%);
+  color: var(--stone); border-radius: var(--radius-lg); padding: clamp(30px, 5vw, 56px);
+  text-align: center; position: relative; overflow: hidden;
+}
+.tyf .cta-band::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 85% 0%, rgba(200,145,42,.22), transparent 55%); pointer-events: none;
+}
+.tyf .cta-band > * { position: relative; z-index: 1; }
+.tyf .cta-band h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 2.7rem); color: #fff; margin: 0 0 12px; font-weight: 600; }
+.tyf .cta-band p { max-width: 54ch; margin: 0 auto 22px; color: rgba(245,240,232,.9); }
+.tyf .cta-band .cta-sub { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .06em; font-size: .82rem; color: rgba(245,240,232,.7); margin-top: 16px; }
+
+/* Reviews prompt (no fabricated testimonials) */
+.tyf .reviews-cta {
+  display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between;
+  border: 1px dashed var(--gold); border-radius: var(--radius-md);
+  background: rgba(200,145,42,.06); padding: 24px 26px; margin-top: 28px;
+}
+.tyf .reviews-cta .stars { color: var(--gold); font-size: 1.5rem; letter-spacing: 3px; }
+.tyf .reviews-cta b { color: var(--forest); }
+
+/* Contact method cards */
+.tyf .contact-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 28px; }
+@media (min-width: 640px) { .tyf .contact-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .tyf .contact-grid { grid-template-columns: repeat(4, 1fr); } }
+.tyf .contact-tile {
+  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 22px;
+}
+.tyf .contact-tile .ct-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(19,115,58,.08); color: var(--forest); margin-bottom: 12px; }
+.tyf .contact-tile .ct-ico svg { width: 22px; height: 22px; }
+.tyf .contact-tile h3 { font-family: var(--font-head); color: var(--forest); font-size: 1.2rem; margin: 0 0 4px; }
+.tyf .contact-tile a { color: var(--ink); font-weight: 600; }
+.tyf .contact-tile p { margin: 0; color: var(--ink-soft); font-size: .92rem; }
+
+/* Prose (legal / long text) */
+.tyf .prose { max-width: 760px; }
+.tyf .prose h2 { font-family: var(--font-head); color: var(--forest); font-size: 1.5rem; margin: 30px 0 10px; }
+.tyf .prose p, .tyf .prose li { color: var(--ink-soft); line-height: 1.7; }
