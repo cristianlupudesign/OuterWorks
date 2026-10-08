@@ -3250,3 +3250,33 @@ html.has-announcement .site-header { top: 0; }
   background: rgba(255,255,255,.96);
   color: var(--ink);
 }
+
+/* ============================================================
+   Brand mark as a design element
+   The Outerworks mark (horizon arc + roofline swoosh) is reused
+   as hero watermark, section seal, kicker bullet, card stamps
+   and footer watermark. Files: assets/img/outerworks-mark*.svg
+   ============================================================ */
+
+/* Footer watermark */
+.site-footer { position: relative; overflow: hidden; }
+.site-footer > .container { position: relative; z-index: 1; }
+.site-footer::before {
+  content: ""; position: absolute; pointer-events: none;
+  width: clamp(320px, 42vw, 620px); aspect-ratio: 469.7 / 458.6;
+  right: clamp(-160px, -6vw, -60px); bottom: -18%;
+  background: url('../img/outerworks-mark-light.svg') center / contain no-repeat;
+  opacity: .06;
+}
+
+@keyframes ow-mark-rise {
+  from { opacity: 0; transform: translateY(24px) scale(.96); }
+  to   { opacity: var(--ow-mark-opacity, .1); transform: none; }
+}
+
+/* Light pages: cream footer needs the full-colour logo and mark */
+.page-light .site-footer .brand-logo { filter: none; }
+.page-light .site-footer::before {
+  background-image: url('../img/outerworks-mark.svg');
+  opacity: .05;
+}
