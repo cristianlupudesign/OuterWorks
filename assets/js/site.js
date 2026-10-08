@@ -230,7 +230,14 @@
       event.preventDefault();
 
       if (!endpoint || endpoint.includes('your-form-id')) {
-        setStatus(form, 'Add your Formspree endpoint in assets/js/config.js before going live.', 'error');
+        const fd = new FormData(form);
+        const lines = ['Hi Outerworks, I have an enquiry.'];
+        fd.forEach((value, key) => {
+          if (key.startsWith('_') || typeof value !== 'string' || !value.trim()) return;
+          lines.push(key.replace(/_/g, ' ') + ': ' + value.trim());
+        });
+        setStatus(form, 'Opening WhatsApp with your message — just press send. No WhatsApp? Call 07348 580359.', 'success');
+        window.location.href = 'https://wa.me/447348580359?text=' + encodeURIComponent(lines.join('\n'));
         return;
       }
 

@@ -600,3 +600,8 @@
 .tyf .scarcity b { color: #fff; font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; }
 .tyf .scarcity p { margin: 2px 0 0; color: rgba(245,240,232,.82); font-size: .92rem; }
 .tyf .scarcity .btn { flex: 0 0 auto; }
+
+/* Price-on-survey states (no published per-metre figures) */
+.tyf .price-amount--text { font-size: 1.6rem; }
+.tyf .stack-price .sp-amount--text { font-size: 1.7rem; line-height: 1.15; }
+.tyf .stack-total .st-val--zero { text-decoration: none; color: var(--forest); }

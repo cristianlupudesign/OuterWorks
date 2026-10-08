@@ -93,10 +93,23 @@
         page: window.location.pathname
       });
 
-      // No endpoint configured yet — make the state obvious in dev.
+      // No form backend configured — hand the enquiry to WhatsApp so the
+      // team actually receives it (never leave a lead sitting in the browser).
       if (!endpoint || endpoint.includes('your-lead-form-id')) {
-        setStatus(form, 'Thanks — your details are saved. (Set leadEndpoint in assets/js/config.js to send them to the team.)', 'success');
-        form.reset();
+        const area = data.get('area');
+        const lines = [
+          'Hi Outerworks, I would like a fixed price for a fence.',
+          'Name: ' + data.get('name'),
+          'Mobile: ' + data.get('mobile'),
+          'Postcode: ' + data.get('postcode'),
+          'Approx length: ' + data.get('fence_length') + ' m'
+        ];
+        if (area) lines.push('Area: ' + area);
+        const photo = data.get('photo');
+        if (photo && photo.name) lines.push('I will send a photo in this chat.');
+        const waUrl = 'https://wa.me/447348580359?text=' + encodeURIComponent(lines.join('\n'));
+        setStatus(form, 'Opening WhatsApp with your details — just press send. No WhatsApp? Call 07348 580359.', 'success');
+        window.location.href = waUrl;
         return;
       }
 

@@ -13,10 +13,10 @@ window.OuterworksSiteConfig = {
   // Top announcement bar — set text to empty string to hide.
   // Changing the `id` forces the bar to reappear even for users who dismissed a previous message.
   announcement: {
-    id: "spring-2026",
-    text: "Spring bookings now open — site visits within 7 days across West London.",
-    ctaLabel: "Book a slot",
-    ctaHref: "contact/#quote-form"
+    id: "autumn-2026",
+    text: "Autumn storm season — free surveys across West London. Book before the winter winds.",
+    ctaLabel: "Get my fixed price",
+    ctaHref: "ten-year-fence/#get-my-fixed-price"
   },
 
   // Coverage postcode prefixes (outward part). Matches will show a green "in area" state.
