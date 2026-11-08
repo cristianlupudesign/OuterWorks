@@ -220,7 +220,7 @@
       const match = prefixes.includes(outward);
       result.className = 'postcode-result ' + (match ? 'is-match' : 'is-wide');
       result.innerHTML = match
-        ? `<strong>${raw} is in our usual patch.</strong> Expect a reply the same working day.`
+        ? `<strong>${raw} is in our usual patch.</strong> Expect a reply the same day.`
         : `<strong>${raw} is outside the usual patch.</strong> Larger jobs still travel — send a message and we'll confirm.`;
     });
   }

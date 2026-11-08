@@ -1,0 +1,139 @@
+/* ============================================================
+   Outerworks — heritage layer
+   A quiet, old-craftsman feel on top of the existing brand:
+   same greens and gold, a classic serif for headings, warm
+   paper tones, squarer corners and stamp-style marks.
+   Loaded last on every page. Delete the <link> to switch off.
+   ============================================================ */
+
+:root {
+  --font-serif: "Fraunces", "Georgia", "Times New Roman", serif;
+  --paper-warm: #F3ECDF;
+  --card: #FBF7EF;
+  --rule: rgba(74, 55, 40, .22);
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+/* ---------- Paper ---------- */
+body.tyf {
+  background-color: var(--paper-warm);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .29 0 0 0 0 .21 0 0 0 0 .16 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.tyf .tyf-section.alt { background-color: #EAE1D2; }
+
+/* ---------- Type ---------- */
+.tyf h1, .tyf h2,
+.tyf .tyf-h2, .tyf .tyf-hero h1, .tyf .cta-band h2,
+.tyf .section-title, .tyf .page-hero-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-variation-settings: "SOFT" 60;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+.tyf .tyf-hero h1 { line-height: 1.06; max-width: 17ch; }
+.tyf .tyf-hero h1 .accent,
+.tyf .tyf-h2 em { font-style: italic; font-weight: 500; }
+.tyf h3,
+.tyf .svc-card h3, .tyf .step h3, .tyf .lead-card h3, .tyf .guarantee-item h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Eyebrows: small caps flanked by a rule, like a sign-writer's label */
+.tyf .tyf-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  letter-spacing: .18em;
+}
+.tyf .tyf-eyebrow::before {
+  content: ""; width: 26px; height: 1px; background: currentColor; opacity: .7;
+}
+
+/* ---------- Stamp marks ---------- */
+.tyf .tyf-hero-badge,
+.tyf .price-badge {
+  border-radius: 2px;
+  border: 1.5px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+  letter-spacing: .2em;
+  transform: rotate(-1.5deg);
+}
+.tyf .tyf-hero-badge { margin-left: 4px; }
+
+.tyf .guarantee-item {
+  border-top: 0;
+  padding: 22px 20px 20px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  outline: 1px solid var(--rule);
+  outline-offset: -6px;
+  border-radius: var(--radius-sm);
+}
+.tyf .guarantee-item h3::before {
+  content: "\2605";
+  display: inline-grid; place-items: center;
+  width: 30px; height: 30px; margin-right: 10px;
+  border: 1.5px dashed var(--gold); border-radius: 50%;
+  color: var(--gold); font-size: .8rem; vertical-align: middle;
+}
+
+/* Hero guarantee line reads like a stamped strap */
+.tyf .tyf-hero-guarantee {
+  border-top: 1px solid rgba(232,184,75,.45);
+  border-bottom: 1px solid rgba(232,184,75,.45);
+  padding: 6px 2px;
+}
+
+/* ---------- Cards: squarer, warmer, inner rule ---------- */
+.tyf .svc-card, .tyf .price-card, .tyf .contact-tile, .tyf .step,
+.tyf .lead-card, .tyf .faq, .tyf .area-tile, .tyf .value-stack li,
+.tyf .reviews-cta, .tyf .trust-strip {
+  background-color: var(--card);
+  border-color: var(--rule);
+}
+.tyf .svc-card, .tyf .price-card, .tyf .lead-card {
+  box-shadow: inset 0 0 0 5px var(--card), inset 0 0 0 6px rgba(74,55,40,.12);
+}
+.tyf .svc-card:hover { box-shadow: inset 0 0 0 5px var(--card), inset 0 0 0 6px rgba(200,145,42,.45), 0 18px 36px rgba(74,55,40,.12); }
+.tyf .price-card.is-featured { box-shadow: inset 0 0 0 5px var(--card), inset 0 0 0 6px rgba(200,145,42,.5); }
+
+/* ---------- Buttons ---------- */
+.tyf .btn, .tyf .btn-secondary, .tyf .nav-cta { border-radius: 3px; letter-spacing: .04em; }
+.tyf .btn { box-shadow: 0 2px 0 #9b6d1c, 0 10px 22px rgba(200,145,42,.22); }
+.tyf .btn:active { transform: translateY(1px); box-shadow: 0 1px 0 #9b6d1c; }
+.tyf .btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+
+/* ---------- Photos: a touch of age ---------- */
+.tyf .tyf-hero-media, .tyf .tyf-split-media, .tyf .gal-item {
+  filter: sepia(.14) saturate(.9) contrast(1.02);
+}
+.tyf .gal-item span, .tyf .gal-item { border-radius: var(--radius-sm); }
+
+/* ---------- Section dividers: double rule ---------- */
+.tyf .tyf-section + .tyf-section:not(.alt) { border-top: 3px double var(--rule); }
+
+/* ---------- Form ---------- */
+.tyf .lead-field select {
+  width: 100%; padding: 12px 38px 12px 14px;
+  border: 1px solid var(--pebble); border-radius: var(--radius-xs);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%234A3728' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center / 12px 8px;
+  font: inherit; color: var(--ink); appearance: none; -webkit-appearance: none;
+}
+.tyf .lead-field select:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+.tyf .lead-opt { font-weight: 400; color: var(--clay); text-transform: none; letter-spacing: 0; }
+.tyf .lead-help a, .tyf .form-status a { color: var(--forest); font-weight: 600; text-decoration: underline; }
+
+/* ---------- Area pages: nearby list ---------- */
+.tyf .area-nearby { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding: 0; list-style: none; }
+.tyf .area-nearby a {
+  display: inline-block; padding: 6px 12px; border: 1px solid var(--rule);
+  border-radius: 2px; background: var(--card); color: var(--forest);
+  font-weight: 600; font-size: .92rem; text-decoration: none;
+}
+.tyf .area-nearby a:hover { border-color: var(--gold); }

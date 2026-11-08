@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://outerworks.co.uk/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://outerworks.co.uk/ten-year-fence/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://outerworks.co.uk/built-right-fence/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://outerworks.co.uk/services/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://outerworks.co.uk/services/fencing/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/services/decking/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/services/pergolas/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/services/sheds/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/services/gates/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/gallery/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/areas/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://outerworks.co.uk/areas/ruislip/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -18,6 +19,19 @@
   <url><loc>https://outerworks.co.uk/areas/eastcote/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/areas/ickenham/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/areas/northolt/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/acton/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/ealing/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/hanwell/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/greenford/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/southall/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/hayes/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/hillingdon/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/west-drayton/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/wembley/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/stanmore/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/edgware/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/mill-hill/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://outerworks.co.uk/areas/barnet/</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://outerworks.co.uk/about/</loc><lastmod>2026-11-08</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://outerworks.co.uk/contact/</loc><lastmod>2026-11-08</lastmod><changefreq>yearly</changefreq><priority>0.9</priority></url>
   <url><loc>https://outerworks.co.uk/privacy/</loc><lastmod>2026-11-08</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>

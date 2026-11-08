@@ -1,140 +1,87 @@
 /* ============================================================
-   Outerworks — lead capture for "The 10-Year Fence" offer page
-   and area pages. Handles the [data-lead-form] fixed-price forms.
+   Outerworks — enquiry forms ([data-lead-form]).
 
-   Fields: name, mobile, postcode, approx fence length (m),
-   optional photo upload.
+   No server is involved: on submit the form builds a message
+   and opens WhatsApp to 07348 580359 with it ready to send.
+   If WhatsApp can't open, the status line offers a pre-filled
+   email to contact@outerworks.co.uk instead.
 
-   On submit we:
-     1) validate the required fields,
-     2) store the lead locally as a fallback record, and
-     3) fire a notification to an email/webhook endpoint.
+   Fields: name, mobile, postcode, job (what they need),
+   optional rough size. Hidden: area, source_page.
 
-   ------------------------------------------------------------
-   SECURITY NOTE — DO NOT re-add Telegram here.
-   The previous Outerworks Telegram bot token was COMPROMISED.
-   Do NOT wire a Telegram bot into this file. Once a new bot is
-   provisioned, prefer a server-side relay (never ship a bot
-   token in client-side JS). Until then this uses an
-   email/webhook placeholder only. See the TODO below.
-   ------------------------------------------------------------
+   SECURITY: never put a messaging bot token in client-side JS.
    ============================================================ */
 
 (function () {
-  const cfg = (window.OuterworksSiteConfig || {});
-  // TODO(owner): set the real lead endpoint before going live.
-  //   Recommended: a serverless function / form backend (e.g. Formspree,
-  //   a Cloudflare Worker, or your own webhook) that emails the team.
-  //   Example config in assets/js/config.js:
-  //       leadEndpoint: "https://formspree.io/f/your-lead-form-id"
-  //   Notification target (for the endpoint to route to):
-  //       leadNotifyEmail: "leads@outerworks.co.uk"   // TODO real inbox
-  //   DO NOT put a Telegram bot token here (see security note above).
-  const endpoint = ((cfg.leadEndpoint || '') + '').trim();
-  const notifyEmail = ((cfg.leadNotifyEmail || '') + '').trim();
+  const WA_NUMBER = '447348580359';
+  const EMAIL = 'contact@outerworks.co.uk';
 
   const forms = document.querySelectorAll('[data-lead-form]');
   if (!forms.length) return;
 
-  function setStatus(form, message, type) {
+  function value(form, name) {
+    const field = form.querySelector('[name="' + name + '"]');
+    return field ? String(field.value || '').trim() : '';
+  }
+
+  function setStatus(form, html, type) {
     const el = form.querySelector('[data-form-status]');
     if (!el) return;
-    el.textContent = message || '';
+    el.innerHTML = html || '';
     el.classList.remove('is-error', 'is-success');
     if (type) el.classList.add('is-' + type);
   }
 
-  function storeLeadLocally(record) {
-    // Fallback record so a lead is never lost if the network call fails.
-    try {
-      const key = 'ow-leads';
-      const existing = JSON.parse(localStorage.getItem(key) || '[]');
-      existing.push(record);
-      localStorage.setItem(key, JSON.stringify(existing.slice(-50)));
-    } catch (e) { /* storage may be unavailable; ignore */ }
-  }
-
-  function validate(form) {
-    const required = ['name', 'mobile', 'postcode', 'fence_length'];
-    for (const name of required) {
-      const field = form.querySelector('[name="' + name + '"]');
-      if (!field || !String(field.value).trim()) {
-        return { ok: false, field };
-      }
-    }
-    return { ok: true };
+  function buildMessage(form) {
+    const job = value(form, 'job');
+    const lines = [
+      'Hi Outerworks, I\'d like a price' + (job && job !== 'Something else' ? ' for ' + job.toLowerCase() : '') + '.',
+      '',
+      'Name: ' + value(form, 'name'),
+      'Mobile: ' + value(form, 'mobile'),
+      'Postcode: ' + value(form, 'postcode').toUpperCase()
+    ];
+    if (job) lines.push('Job: ' + job);
+    const size = value(form, 'size');
+    if (size) lines.push('Rough size: ' + size);
+    const area = value(form, 'area');
+    if (area) lines.push('Area page: ' + area);
+    lines.push('', 'I can send photos here.');
+    return lines.join('\n');
   }
 
   forms.forEach(function (form) {
-    form.addEventListener('submit', async function (event) {
+    form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      const check = validate(form);
-      if (!check.ok) {
-        setStatus(form, 'Please add your name, mobile, postcode and rough fence length so we can price it.', 'error');
-        if (check.field) check.field.focus();
-        return;
+      if (value(form, '_gotcha')) return; // bot filled the honeypot
+
+      const required = [
+        ['name', 'your name'],
+        ['mobile', 'a mobile number'],
+        ['postcode', 'your postcode'],
+        ['job', 'what you need']
+      ];
+      for (const [name, label] of required) {
+        if (!value(form, name)) {
+          setStatus(form, 'Please add ' + label + ' so we can price it.', 'error');
+          const field = form.querySelector('[name="' + name + '"]');
+          if (field) field.focus();
+          return;
+        }
       }
 
-      const submit = form.querySelector('button[type="submit"]');
-      const originalLabel = submit ? submit.textContent : '';
-      const data = new FormData(form);
-      data.append('_subject', 'New 10-Year Fence enquiry (fixed price request)');
-      data.append('source_page', document.title);
-      data.append('page_url', window.location.href);
-      if (notifyEmail) data.append('_replyto_team', notifyEmail);
+      const message = buildMessage(form);
+      const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
+      const mailUrl = 'mailto:' + EMAIL +
+        '?subject=' + encodeURIComponent('Price request — ' + (value(form, 'job') || 'outdoor works') + ' — ' + value(form, 'postcode').toUpperCase()) +
+        '&body=' + encodeURIComponent(message);
 
-      // Local fallback record (photo intentionally not stored locally)
-      storeLeadLocally({
-        name: data.get('name'),
-        mobile: data.get('mobile'),
-        postcode: data.get('postcode'),
-        fence_length: data.get('fence_length'),
-        page: window.location.pathname
-      });
+      setStatus(form,
+        'Opening WhatsApp — just press send. Didn\'t open? <a href="' + mailUrl + '">Email it instead</a> or call <a href="tel:07348580359">07348 580359</a>.',
+        'success');
 
-      // No form backend configured — hand the enquiry to WhatsApp so the
-      // team actually receives it (never leave a lead sitting in the browser).
-      if (!endpoint || endpoint.includes('your-lead-form-id')) {
-        const area = data.get('area');
-        const lines = [
-          'Hi Outerworks, I would like a fixed price for a fence.',
-          'Name: ' + data.get('name'),
-          'Mobile: ' + data.get('mobile'),
-          'Postcode: ' + data.get('postcode'),
-          'Approx length: ' + data.get('fence_length') + ' m'
-        ];
-        if (area) lines.push('Area: ' + area);
-        const photo = data.get('photo');
-        if (photo && photo.name) lines.push('I will send a photo in this chat.');
-        const waUrl = 'https://wa.me/447348580359?text=' + encodeURIComponent(lines.join('\n'));
-        setStatus(form, 'Opening WhatsApp with your details — just press send. No WhatsApp? Call 07348 580359.', 'success');
-        window.location.href = waUrl;
-        return;
-      }
-
-      try {
-        if (submit) { submit.disabled = true; submit.textContent = 'Sending…'; }
-        setStatus(form, 'Sending your details…');
-
-        // TODO(owner): the endpoint should notify the team (email/webhook).
-        // Do NOT notify via a client-side Telegram bot — token was compromised.
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (!response.ok) throw new Error('Request failed');
-
-        form.reset();
-        setStatus(form, 'Thanks — the team will confirm your fixed price band and start date shortly.', 'success');
-        const prefix = '../'.repeat(Number(document.body.dataset.depth || 0));
-        window.setTimeout(function () { window.location.href = prefix + 'thank-you/'; }, 400);
-      } catch (err) {
-        setStatus(form, 'That did not go through. Call or WhatsApp us on 07348 580359 and we will pick it up.', 'error');
-      } finally {
-        if (submit) { submit.disabled = false; submit.textContent = originalLabel; }
-      }
+      window.location.href = waUrl;
     });
   });
 })();

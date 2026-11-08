@@ -8,17 +8,12 @@ GitHub-ready multipage site for Outerworks with shared CSS/JS, responsive naviga
 - Services hub
 - Individual service pages:
   - Fencing
+  - Gates
   - Decking
   - Pergolas
-  - Paving
-  - Sheds
-  - Grass Cutting
-  - Parcel Boxes
-  - Gates
-  - Sleeper Planters
-  - Shed Bases
-  - Garden Clearances
-- Areas We Cover
+  - Sheds & bases
+- Areas We Cover (hub + 22 local area pages)
+- The Built-Right Fence offer page
 - About
 - Contact
 - Privacy
@@ -29,18 +24,8 @@ GitHub-ready multipage site for Outerworks with shared CSS/JS, responsive naviga
 
 ## Before publishing
 
-### 1) Connect Formspree
-Edit this file:
-
-`assets/js/config.js`
-
-Replace:
-
-`https://formspree.io/f/your-form-id`
-
-with your real Formspree endpoint.
-
-All quote forms use that one config value.
+### 1) Enquiry forms
+All forms open WhatsApp (07348 580359) with the enquiry pre-filled, with an email fallback. See `assets/js/leads.js`. No form backend is needed.
 
 ### 2) Review legal text
 Privacy, Terms and Cookies pages are solid starter pages, but they should still be reviewed against your exact live setup.
