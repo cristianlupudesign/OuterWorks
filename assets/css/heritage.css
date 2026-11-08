@@ -44,14 +44,6 @@ body.tyf {
   text-transform: none;
 }
 
-/* Eyebrows: small caps flanked by a rule, like a sign-writer's label */
-.tyf .tyf-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  letter-spacing: .18em;
-}
-.tyf .tyf-eyebrow::before {
-  content: ""; width: 26px; height: 1px; background: currentColor; opacity: .7;
-}
 
 /* ---------- Stamp marks ---------- */
 .tyf .tyf-hero-badge,
@@ -177,3 +169,35 @@ body.tyf {
 .tyf .guide-aside .btn { width: 100%; }
 @media (max-width: 979px) { .tyf .guide-aside { position: static; } }
 @media (max-width: 600px) { .tyf .guide-table { font-size: .85rem; } .tyf .guide-table th, .tyf .guide-table td { padding: 8px; } }
+
+/* ---------- Design fixes ---------- */
+/* Announcement bar scrolls away; the header is placed below it by site.js */
+.announcement { position: relative; }
+html.has-announcement .site-header { transition: background .35s ease, box-shadow .35s ease; }
+
+/* Hero headline: calmer size, wider measure */
+.tyf .tyf-hero h1 { font-size: clamp(2.3rem, 5vw, 4rem); max-width: 19ch; }
+.tyf .tyf-hero h1.promise { max-width: 18ch; }
+
+/* Secondary button on dark heroes was green-on-green */
+.tyf .tyf-hero .btn-secondary {
+  color: #fff; border: 1px solid rgba(255,255,255,.55); background: rgba(255,255,255,.08);
+  border-radius: 3px; padding: 12px 20px; font-weight: 700;
+}
+.tyf .tyf-hero .btn-secondary:hover { background: rgba(255,255,255,.16); border-color: #fff; }
+
+/* Form: the service picker matches the text fields */
+.tyf .lead-field select {
+  background-color: var(--stone); border-color: var(--pebble);
+  padding-top: 12px; padding-bottom: 12px; line-height: 1.4; min-height: 0; height: auto;
+}
+.tyf .lead-field input, .tyf .lead-field select { font-size: 1rem; line-height: 1.4; }
+
+/* Phones: sticky bar + one WhatsApp button is enough */
+@media (max-width: 899px) {
+  .quick-contact-call, .quick-contact-email { display: none !important; }
+  .quick-contact { right: 14px !important; }
+}
+
+/* The logo on the featured price card competed with the stamp */
+.tyf .price-card.is-featured::after { display: none; }

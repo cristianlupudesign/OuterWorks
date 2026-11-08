@@ -108,7 +108,7 @@
 @media (min-width: 720px) { .tyf .value-stack { grid-template-columns: 1fr 1fr; } }
 .tyf .value-stack li {
   display: flex; gap: 14px; align-items: flex-start;
-  background: #fff; border: 1px solid var(--pebble);
+  background: var(--card, #fff); border: 1px solid var(--pebble);
   border-radius: var(--radius-sm); padding: 16px 18px;
 }
 .tyf .value-stack .tick {
@@ -127,7 +127,7 @@
 @media (min-width: 900px) { .tyf .pricing-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
 .tyf .price-card {
   position: relative; display: flex; flex-direction: column;
-  background: #fff; border: 1px solid var(--pebble);
+  background: var(--card, #fff); border: 1px solid var(--pebble);
   border-radius: var(--radius-md); padding: 26px 24px;
   box-shadow: 0 18px 40px rgba(19,115,58,.06);
 }
@@ -174,7 +174,7 @@
 @media (min-width: 980px) { .tyf .proof-grid { grid-template-columns: repeat(4, 1fr); } }
 .tyf .proof-item {
   border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--pebble);
-  background: #fff;
+  background: var(--card, #fff);
 }
 .tyf .proof-ph {
   aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center;
@@ -203,7 +203,7 @@
 /* ---------- Guarantee block ---------- */
 .tyf .guarantee-panel {
   border: 2px solid var(--gold); border-radius: var(--radius-md);
-  background: #fff; padding: clamp(24px, 4vw, 40px);
+  background: var(--card, #fff); padding: clamp(24px, 4vw, 40px);
   box-shadow: 0 24px 54px rgba(200,145,42,.12);
 }
 .tyf .guarantee-grid {
@@ -221,7 +221,7 @@
 /* ---------- FAQ ---------- */
 .tyf .faq-list { margin-top: 26px; display: grid; gap: 12px; }
 .tyf .faq {
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-sm);
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-sm);
   overflow: hidden;
 }
 .tyf .faq summary {
@@ -242,7 +242,7 @@
 }
 @media (min-width: 940px) { .tyf .lead-wrap { grid-template-columns: 1.05fr .95fr; } }
 .tyf .lead-card {
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md);
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-md);
   padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow-soft);
 }
 .tyf .lead-card h3 { font-family: var(--font-head); color: var(--forest); font-size: 1.5rem; margin: 0 0 6px; }
@@ -356,7 +356,7 @@
 @media (min-width: 980px) { .tyf .svc-grid { grid-template-columns: repeat(3, 1fr); } }
 .tyf .svc-card {
   display: flex; flex-direction: column; gap: 10px;
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md);
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-md);
   padding: 24px 22px; box-shadow: 0 14px 34px rgba(19,115,58,.05);
   transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
 }
@@ -383,7 +383,7 @@
 .tyf .tyf-steps.four { }
 @media (min-width: 900px) { .tyf .tyf-steps.four { grid-template-columns: repeat(4, 1fr); } }
 .tyf .step {
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 24px 22px;
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 24px 22px;
 }
 .tyf .step .step-n {
   width: 42px; height: 42px; border-radius: 999px; display: grid; place-items: center;
@@ -415,7 +415,7 @@
 @media (min-width: 900px) { .tyf .area-grid { grid-template-columns: repeat(4, 1fr); } }
 .tyf .area-tile {
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-sm);
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-sm);
   padding: 14px 16px; font-weight: 600; color: var(--forest);
   transition: border-color .2s, transform .2s;
 }
@@ -466,7 +466,7 @@
 @media (min-width: 640px) { .tyf .contact-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 980px) { .tyf .contact-grid { grid-template-columns: repeat(4, 1fr); } }
 .tyf .contact-tile {
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 22px;
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-md); padding: 22px;
 }
 .tyf .contact-tile .ct-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(19,115,58,.08); color: var(--forest); margin-bottom: 12px; }
 .tyf .contact-tile .ct-ico svg { width: 22px; height: 22px; }
@@ -507,7 +507,7 @@
 .tyf .problem-grid { display: grid; gap: 16px; margin-top: 30px; grid-template-columns: 1fr; }
 @media (min-width: 820px) { .tyf .problem-grid { grid-template-columns: repeat(3, 1fr); } }
 .tyf .problem-card {
-  background: #fff; border: 1px solid var(--pebble); border-left: 4px solid #b23b2e;
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-left: 4px solid #b23b2e;
   border-radius: var(--radius-md); padding: 24px 22px;
 }
 .tyf .problem-card .px {
@@ -522,7 +522,7 @@
 
 /* The Grand Slam Offer — value stack with anchors */
 .tyf .offer-stack {
-  background: #fff; border: 2px solid var(--gold); border-radius: var(--radius-lg);
+  background: var(--card, #fff); border: 2px solid var(--gold); border-radius: var(--radius-lg);
   box-shadow: 0 30px 70px rgba(200,145,42,.16); overflow: hidden; max-width: 720px; margin-top: 30px;
 }
 .tyf .offer-stack-head {
@@ -563,7 +563,7 @@
 .tyf .gtee-stack { display: grid; gap: 14px; margin-top: 28px; }
 .tyf .gtee-bar {
   display: flex; gap: 16px; align-items: flex-start;
-  background: #fff; border: 1px solid var(--pebble); border-radius: var(--radius-md);
+  background: var(--card, #fff); border: 1px solid var(--pebble); border-radius: var(--radius-md);
   padding: 20px 22px; border-left: 4px solid var(--gold);
 }
 .tyf .gtee-bar .gb-ico { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 12px; background: rgba(200,145,42,.14); color: var(--gold-ink, #8a571a); display: grid; place-items: center; }
@@ -574,7 +574,7 @@
 
 /* Comparison — us vs the cheapest quote */
 .tyf .compare {
-  margin-top: 30px; background: #fff; border: 1px solid var(--pebble);
+  margin-top: 30px; background: var(--card, #fff); border: 1px solid var(--pebble);
   border-radius: var(--radius-lg); overflow: hidden;
 }
 .tyf .compare table { width: 100%; border-collapse: collapse; }
